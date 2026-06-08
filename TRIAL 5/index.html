@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priority Activator Consulting | Organizational Transformation Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   CSS VARIABLES & RESET
+   ============================================================ */
+:root {
+  --orange: #EB5733;
+  --orange-dark: #c94420;
+  --black: #131313;
+  --grey: #706F6F;
+  --grey-light: #A8A8A8;
+  --grey-bg: #F5F4F2;
+  --white: #FFFFFF;
+  --border: #E8E6E2;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --nav-h: 76px;
+  --transition: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+ul { list-style: none; }
+
+/* ============================================================
+   TYPOGRAPHY SYSTEM
+   ============================================================ */
+.display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.body-lg { font-size: 1.1rem; line-height: 1.75; color: var(--grey); font-weight: 300; }
+.body-md { font-size: 0.95rem; line-height: 1.7; color: var(--grey); }
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  padding: 0 5%;
+}
+#nav.scrolled {
+  border-bottom-color: var(--border);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+}
+.nav-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.nav-logo-svg {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--black);
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--orange);
+  transition: width 0.3s var(--transition);
+}
+.nav-links a:hover::after { width: 100%; }
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+  padding: 0.65rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background 0.25s, transform 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--orange-dark);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  border: 1.5px solid var(--black);
+  color: var(--black);
+  padding: 0.65rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: border-color 0.25s, color 0.25s, transform 0.2s;
+}
+.btn-secondary:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  transform: translateY(-1px);
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 1.5px;
+  background: var(--black);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 5% 2rem;
+  z-index: 999;
+  flex-direction: column;
+  gap: 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  display: block;
+  padding: 0.85rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  color: var(--black);
+}
+.mobile-menu .btn-primary {
+  margin-top: 1.25rem;
+  display: block;
+  text-align: center;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+#hero {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+}
+.hero-content {
+  padding: 8% 6% 8% 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px; height: 1.5px;
+  background: var(--orange);
+}
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4.5vw, 4.4rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  max-width: 14ch;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--orange);
+}
+.hero-body {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--grey);
+  max-width: 42ch;
+  font-weight: 300;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.hero-visual {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+  
+}
+.hero-img-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #706F6F 0%, #0d0d0d 100%);
+}
+.hero-visual-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem;
+}
+/* Abstract hero visual */
+.hero-abstract {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.hero-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-circle-1 {
+  position: absolute;
+  top: 15%; right: 10%;
+  width: 280px; height: 280px;
+  border: 1px solid rgba(235, 87, 51, 0.3);
+  border-radius: 50%;
+  animation: rotateCircle 20s linear infinite;
+}
+.hero-circle-2 {
+  position: absolute;
+  top: 20%; right: 15%;
+  width: 180px; height: 180px;
+  border: 1px solid rgba(235, 87, 51, 0.15);
+  border-radius: 50%;
+  animation: rotateCircle 14s linear infinite reverse;
+}
+.hero-dot-grid {
+  position: absolute;
+  bottom: 20%; left: 10%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 14px;
+}
+.hero-dot-grid span {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: block;
+}
+.hero-dot-grid span:nth-child(3n) { background: rgba(235,87,51,0.5); }
+.hero-accent-line {
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(235,87,51,0.4), transparent);
+  transform: translateY(-50%);
+}
+.hero-card {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+.hero-card-label { color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; font-family: var(--font-mono); }
+.hero-card-stat { color: var(--white); font-family: var(--font-display); font-size: 1.8rem; font-weight: 500; }
+.hero-card-desc { color: rgba(255,255,255,0.5); font-size: 0.82rem; margin-top: 0.25rem; }
+.hero-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  position: relative;
+  z-index: 2;
+}
+.hero-tag {
+  position: absolute;
+  top: 2.5rem; left: 2.5rem;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+  z-index: 3;
+}
+@keyframes rotateCircle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  z-index: 3;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* ============================================================
+   TRUST / STATS SECTION
+   ============================================================ */
+#trust {
+  padding: 5rem 5%;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.trust-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.trust-stat {
+  padding: 2rem 3rem;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.trust-stat:last-child { border-right: none; }
+.trust-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  line-height: 1;
+}
+.trust-number .accent { color: var(--orange); }
+.trust-label {
+  font-size: 0.95rem;
+  color: var(--grey);
+  font-weight: 400;
+  max-width: 20ch;
+}
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+#about {
+  padding: 8rem 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.about-visual {
+  position: relative;
+}
+.about-img-block {
+  aspect-ratio: 3/4;
+  background: var(--grey-bg);
+  position: relative;
+  overflow: hidden;
+}
+.about-img-block-inner {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #f0ede8, #e8e5df);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-abstract {
+  width: 100%; height: 100%;
+  position: relative;
+}
+.about-lines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    rgba(0,0,0,0.03) 40px,
+    rgba(0,0,0,0.03) 41px
+  );
+}
+.about-orb {
+  position: absolute;
+  top: 30%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px; height: 200px;
+  background: radial-gradient(circle at 40% 40%, rgba(235,87,51,0.15), rgba(235,87,51,0.03));
+  border-radius: 50%;
+}
+.about-badge {
+  position: absolute;
+  bottom: -1.5rem; right: -1.5rem;
+  background: var(--black);
+  color: var(--white);
+  padding: 1.5rem;
+  width: 160px;
+}
+.about-badge-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--orange);
+  line-height: 1;
+}
+.about-badge-text {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 0.4rem;
+  line-height: 1.4;
+}
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.about-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+.about-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+.about-pillar {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.pillar-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.pillar-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+  flex: 1;
+}
+.pillar-arrow {
+  color: var(--grey-light);
+  font-size: 0.9rem;
+  transition: color 0.2s, transform 0.2s;
+}
+.about-pillar:hover .pillar-arrow {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   SERVICES SECTION
+   ============================================================ */
+#services {
+  background: var(--grey-bg);
+  padding: 8rem 5%;
+}
+.services-header {
+  max-width: 680px;
+  margin-bottom: 5rem;
+}
+.services-intro {
+  margin-top: 1.5rem;
+}
+.service-pillar {
+  margin-bottom: 5rem;
+}
+.service-pillar:last-child { margin-bottom: 0; }
+.pillar-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.pillar-title-group {}
+.pillar-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--orange);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.pillar-desc {
+  max-width: 36ch;
+  color: var(--grey);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: right;
+}
+.carousel-wrapper { position: relative; }
+.carousel-track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+  cursor: grab;
+}
+.carousel-track:active { cursor: grabbing; }
+.carousel-track::-webkit-scrollbar { display: none; }
+.service-card {
+  flex: 0 0 260px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--transition);
+}
+.service-card:hover {
+  box-shadow: 0 12px 36px rgba(0,0,0,0.09);
+  transform: translateY(-4px);
+  border-color: transparent;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card-icon {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  color: var(--orange);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.service-card-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+.service-card-desc {
+  font-size: 0.82rem;
+  color: var(--grey);
+  line-height: 1.6;
+  flex: 1;
+}
+.carousel-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  justify-content: flex-end;
+}
+.carousel-btn {
+  width: 40px; height: 40px;
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--black);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  font-size: 1rem;
+}
+.carousel-btn:hover {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: var(--white);
+}
+
+/* ============================================================
+   WHY PAC SECTION
+   ============================================================ */
+#why {
+  padding: 8rem 5%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.why-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 5rem;
+}
+.why-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.why-headline em { font-style: italic; color: var(--orange); }
+.why-desc { color: var(--grey); font-size: 1rem; line-height: 1.75; font-weight: 300; }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5px;
+  background: var(--border);
+}
+.why-card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.why-card::after {
+  content: attr(data-num);
+  position: absolute;
+  top: -0.5rem; right: 1rem;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgba(0,0,0,0.03);
+  line-height: 1;
+  transition: color 0.3s;
+  pointer-events: none;
+}
+.why-card:hover { background: var(--black); }
+.why-card:hover .why-card-title,
+.why-card:hover .why-card-desc { color: var(--white); }
+.why-card:hover .why-card-accent { background: var(--orange); }
+.why-card:hover::after { color: rgba(255,255,255,0.05); }
+.why-card-accent {
+  width: 32px; height: 2px;
+  background: var(--black);
+  transition: background 0.3s;
+}
+.why-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.3;
+  transition: color 0.3s;
+}
+.why-card-desc {
+  font-size: 0.875rem;
+  color: var(--grey);
+  line-height: 1.65;
+  transition: color 0.3s;
+}
+
+/* ============================================================
+   INSIGHTS SECTION
+   ============================================================ */
+#insights {
+  background: var(--grey-bg);
+  padding: 8rem 5%;
+}
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3.5rem;
+}
+.section-header-left {}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+.view-all-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--black);
+  transition: color 0.2s;
+  padding-bottom: 1rem;
+}
+.view-all-link::after {
+  content: '→';
+  transition: transform 0.2s;
+}
+.view-all-link:hover { color: var(--orange); }
+.view-all-link:hover::after { transform: translateX(4px); }
+.insights-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
+}
+.insight-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s;
+}
+.insight-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+.insight-card-img {
+  aspect-ratio: 16/9;
+  background: var(--grey-bg);
+  overflow: hidden;
+  position: relative;
+}
+.insight-card.featured .insight-card-img { aspect-ratio: 4/3; }
+.insight-card-img-inner {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.5s var(--ease-out);
+}
+.insight-card:hover .insight-card-img-inner { transform: scale(1.04); }
+/* Abstract insight visuals */
+.insight-visual-1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+.insight-visual-2 { background: linear-gradient(135deg, #2d1b1b 0%, #4a1515 100%); }
+.insight-visual-3 { background: linear-gradient(135deg, #1b2d1b 0%, #154a15 100%); }
+.insight-visual-lines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -60deg, transparent, transparent 8px,
+    rgba(255,255,255,0.05) 8px, rgba(255,255,255,0.05) 9px
+  );
+}
+.insight-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+.insight-category {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.insight-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.insight-card.featured .insight-title { font-size: 1.3rem; }
+.insight-meta {
+  font-size: 0.78rem;
+  color: var(--grey-light);
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   EVENTS SECTION
+   ============================================================ */
+#events {
+  padding: 8rem 5%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.event-card {
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.event-card:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+}
+.event-date-block {
+  background: var(--black);
+  padding: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.event-day {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1;
+}
+.event-month-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.event-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.event-type {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.event-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.event-location {
+  font-size: 0.82rem;
+  color: var(--grey);
+  margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.event-register {
+  padding: 0.9rem 1.5rem;
+  background: var(--grey-bg);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  transition: background 0.2s, color 0.2s;
+}
+.event-card:hover .event-register {
+  background: var(--orange);
+  color: var(--white);
+}
+
+/* ============================================================
+   PARTNERS SECTION
+   ============================================================ */
+#partners {
+  background: var(--grey-bg);
+  padding: 6rem 5%;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.partners-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+.partner-item {
+  background: var(--white);
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(1) opacity(0.4);
+  transition: filter 0.3s;
+}
+.partner-item:hover { filter: grayscale(0) opacity(1); }
+.partner-logo-mock {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   CAREERS SECTION
+   ============================================================ */
+#careers {
+  padding: 8rem 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.careers-content { display: flex; flex-direction: column; gap: 2rem; }
+.careers-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+.careers-body { color: var(--grey); font-size: 1rem; line-height: 1.75; font-weight: 300; }
+.careers-visual {
+  background: var(--black);
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.careers-visual-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.careers-role {
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.careers-role:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+.careers-role:hover { border-bottom-color: rgba(235,87,51,0.5); }
+.role-title {
+  font-weight: 500;
+  color: var(--white);
+  font-size: 0.95rem;
+}
+.role-dept {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+}
+.role-arrow {
+  color: rgba(255,255,255,0.3);
+  font-size: 1rem;
+  transition: color 0.2s, transform 0.2s;
+}
+.careers-role:hover .role-arrow {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.careers-cta { margin-top: 2rem; position: relative; z-index: 1; }
+
+/* ============================================================
+   FINAL CTA SECTION
+   ============================================================ */
+#cta {
+  background: var(--black);
+  padding: 8rem 5%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.cta-accent {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(235,87,51,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.cta-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.cta-headline em { font-style: italic; color: var(--orange); }
+.cta-body {
+  color: rgba(255,255,255,0.55);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 46ch;
+  font-weight: 300;
+}
+.cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn-primary-inv {
+  background: var(--orange);
+  color: var(--white);
+  padding: 0.85rem 1.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.25s, transform 0.2s;
+}
+.btn-primary-inv:hover {
+  background: var(--orange-dark);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.75);
+  padding: 0.85rem 1.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: border-color 0.25s, color 0.25s, transform 0.2s;
+}
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.6);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 5rem 5% 2.5rem;
+  color: rgba(255,255,255,0.6);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand {}
+.footer-logo {
+  margin-bottom: 1.25rem;
+}
+.footer-logo-svg {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+.footer-tagline {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  max-width: 28ch;
+  margin-bottom: 1.5rem;
+}
+.footer-contact-item {
+  font-size: 0.82rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-contact-item a:hover { color: var(--orange); }
+.footer-col-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.footer-links a {
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+.newsletter-input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white);
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.newsletter-input::placeholder { color: rgba(255,255,255,0.35); }
+.newsletter-input:focus { border-color: var(--orange); }
+.newsletter-btn {
+  background: var(--orange);
+  color: var(--white);
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+  text-align: center;
+}
+.newsletter-btn:hover { background: var(--orange-dark); }
+.footer-bottom {
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-copyright { font-size: 0.8rem; }
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.social-icon {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.85rem;
+  transition: border-color 0.25s, color 0.25s, transform 0.25s, background 0.25s;
+  font-weight: 600;
+}
+.social-icon:hover {
+  border-color: var(--orange);
+  color: var(--white);
+  background: var(--orange);
+  transform: scale(1.1);
+}
+
+/* ============================================================
+   SECTION CONTAINER
+   ============================================================ */
+.section-container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  #hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-visual { height: 50vw; min-height: 300px; }
+  #about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-badge { right: 1rem; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .insights-grid { grid-template-columns: 1fr 1fr; }
+  .insight-card.featured { grid-column: 1 / -1; }
+  .events-grid { grid-template-columns: 1fr 1fr; }
+  .partners-grid { grid-template-columns: repeat(3, 1fr); }
+  #careers { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .trust-inner { grid-template-columns: 1fr; }
+  .trust-stat { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; }
+  .trust-stat:last-child { border-bottom: none; }
+}
+@media (max-width: 768px) {
+  :root { --nav-h: 64px; }
+  .why-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .why-grid { grid-template-columns: 1fr; }
+  .insights-grid { grid-template-columns: 1fr; }
+  .events-grid { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: repeat(2, 1fr); }
+  .pillar-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .pillar-desc { text-align: left; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .hero-content { padding: 3rem 5%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Priority Activator Consulting">
+      <svg class="nav-logo-svg" viewBox="0 0 346.3 140.96" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+        <defs>
+          <linearGradient id="nav-lg" x1="154.36" y1="83.95" x2="154.36" y2="-44.29" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#eb5733"/>
+            <stop offset="1" stop-color="#eb5733"/>
+          </linearGradient>
+        </defs>
+        <g>
+          <path fill="#eb5733" d="M57.94,23.27c0,4.15-3.79,7.51-8.47,7.51s-8.47-3.36-8.47-7.51,3.79-7.51,8.47-7.51,8.47,3.36,8.47,7.51Z"/>
+          <path fill="#eb5733" d="M101.32,10.24l-39.52,36.82h-.62c-2.19-1.71-4.92-2.72-7.91-2.72s-5.73,1.01-7.91,2.72h-.57l-10.1-10.17h12.3l4.91,4.84,36.6-31.49h12.84Z"/>
+          <path fill="#131313" d="M72.58,80.88l-12.93.34-7.1-5.05-36.32,31.22H2.83l42.1-39.73h.49c2.17,1.67,4.9,2.67,7.85,2.67,2.28,0,4.41-.59,6.27-1.63l13.05,12.18Z"/>
+          <path fill="#131313" d="M108.41,90.3l-.16,11.87-44.15-37.72c1.33-2.04,2.11-4.48,2.11-7.11,0-2.01-.46-3.92-1.27-5.62l14.27-11.73.23,11.47-5.78,6.24,34.75,32.6Z"/>
+          <path fill="#131313" d="M43.05,65.31l-13.64,11.31-.28-11.48,5.75-6.25L0,26.41l.11-11.87,42.24,35.81c-1.29,2.02-2.03,4.42-2.03,6.99,0,3.01,1.02,5.77,2.72,7.97Z"/>
+        </g>
+        <g>
+          <g>
+            <path fill="url(#nav-lg)" d="M154.81,10.95c-.15-.01-.3-.01-.45-.01-.44,0-.87.01-1.3.02-6.93.24-13.34,2.38-18.67,5.89-1.28.84-2.49,1.76-3.64,2.75-.2.17-.41.36-.61.54-1.57,1.43-3,2.98-4.27,4.66-4.09,5.4-6.49,12.02-6.49,19.17s2.4,13.92,6.49,19.53c1.48,2.03,3.18,3.9,5.07,5.58,4.54,4.05,10.16,6.98,16.39,8.25,2.27.47,4.62.72,7.03.72,19.32,0,34.98-15.84,34.98-34.08s-15.42-32.8-34.53-33.02ZM152.78,28.94c5.71,1.53,9.91,6.75,9.91,12.94,0,3.72-1.52,7.09-3.96,9.53-2.31,2.31-5.44,3.79-8.92,3.94-.2.02-.4.02-.61.02h-11.44s-.02-.02-.02-.03v-26.55c.11-.1.23-.21.35-.31h11.2c.7,0,1.39.05,2.06.16.49.07.96.17,1.43.3Z"/>
+            <path fill="#eb5733" d="M154.81,10.95l-.67,5.91-.34,3.02-1.02,9.06c-.47-.13-.94-.23-1.43-.3-.67-.11-1.36-.16-2.06-.16h-11.2c-.12.1-.24.21-.35.31v26.55s.01.03.02.03h11.44c.21,0,.41,0,.61-.02l-1.24,10.98-.31,2.75-.93,8.25v22.46h-30.52V11.24l36.25-.28h1.75Z"/>
+          </g>
+          <g>
+            <path fill="#eb5733" d="M234.26,13.68h-22.3l-34.25,86.11h29.59l1.62-8.42h27.16l2.64,8.42h29.99L234.26,13.68ZM211.31,74.91l5.52-13.84,5.52-13.83,5.53,13.83,5.52,13.84h-22.09Z"/>
+            <path fill="#fff" d="M224.05,20.92h-4.37l-26.22,71.74h3.64l2.5-6.87,45.56.13,2.56,6.74h3.66l-27.33-71.74ZM200.83,82.42l21.02-57.78,22.02,57.9-43.04-.12Z"/>
+          </g>
+          <g>
+            <path fill="#eb5733" d="M343.03,25.44c-6.33-6.38-14.53-10.84-23.54-12.83-9.02-1.98-18.46-1.4-27.12,1.68-8.67,3.08-16.17,8.52-21.56,15.63-5.39,7.11-8.43,15.57-8.73,24.3-.3,8.74,2.15,17.37,7.04,24.79,4.89,7.42,12.01,13.31,20.44,16.92,8.44,3.61,17.82,4.77,26.95,3.34,9.14-1.43,17.62-5.38,24.38-11.36l-17.45-17.59c-3.07,2.72-6.93,4.52-11.09,5.17-4.16.65-8.42.12-12.26-1.52-3.84-1.64-7.07-4.32-9.3-7.7-2.22-3.38-3.34-7.3-3.2-11.28.14-3.97,1.52-7.82,3.97-11.05s5.87-5.71,9.81-7.11c3.94-1.4,8.23-1.67,12.34-.77,4.1.9,7.83,2.93,10.71,5.83l18.63-16.48Z"/>
+            <path fill="#fff" d="M270.85,53.56c1.12-22.16,17.18-35.45,40.43-34.27,10.52.53,18.34,4.98,22.83,9.48l-2.88,2.2c-4.76-4.72-11.52-8.06-20.1-8.49-21.03-1.06-34.54,11.08-35.56,31.31s11.18,34.1,31.66,35.13c9.69.49,17.03-2.13,24.25-7.75l2.66,2.27c-7.23,5.83-15.45,9.26-27.35,8.66-22.41-1.13-37.04-16.39-35.93-38.55Z"/>
+          </g>
+          <path fill="#fff" d="M154.14,16.86c-.14-.01-.29-.01-.43-.01h-27.8s-.04,0-.04.02v79.75h4.85v-27.54h22.85c12.93,0,23.41-10.49,23.41-23.43v-5.53c0-12.72-10.19-23.04-22.84-23.26ZM166.62,59.45c-4.23,4.25-10.09,6.88-16.56,6.88h-19.88s-.04-.02-.04-.04V19.64s.02-.04.04-.04h20.04c1.22,0,2.41.09,3.58.28,11.15,1.71,19.7,11.37,19.7,23.01,0,6.46-2.63,12.33-6.88,16.56Z"/>
+        </g>
+      </svg>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#footer">Contact</a></li>
+    </ul>
+
+    <a href="#cta" class="btn-primary nav-cta" style="display:inline-flex;align-items:center;gap:6px;">
+      Schedule a Strategy Consultation
+    </a>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <a href="#hero">Home</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#insights">Insights</a>
+  <a href="#events">Events</a>
+  <a href="#careers">Careers</a>
+  <a href="#footer">Contact</a>
+  <a href="#cta" class="btn-primary">Schedule a Strategy Consultation</a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">
+      <span class="label">Advisory &amp; Transformation</span>
+    </div>
+
+    <h1 class="hero-headline reveal reveal-delay-1">
+      Organizational<br>Development<br>with <em>Real-World</em><br>Impact
+    </h1>
+
+    <p class="hero-body reveal reveal-delay-2">
+      PAC partners with organizations to navigate complexity, strengthen performance, and create measurable impact — through integrated advisory expertise spanning business, digital, development, and human capital.
+    </p>
+
+    <div class="hero-actions reveal reveal-delay-3">
+      <a href="#cta" class="btn-primary">Schedule a Strategy Consultation</a>
+      <a href="#cta" class="btn-secondary">Request a Proposal</a>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-img-bg"></div>
+    <div class="hero-abstract">
+      <div class="hero-grid-lines"></div>
+      <div class="hero-circle-1"></div>
+      <div class="hero-circle-2"></div>
+      <div class="hero-accent-line"></div>
+      <div class="hero-dot-grid">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="hero-tag">Integrated Advisory</div>
+    <div class="hero-visual-inner">
+      <div class="hero-cards-row">
+        <div class="hero-card">
+          <div class="hero-card-label">Organizations Served</div>
+          <div class="hero-card-stat">200<span style="color:var(--orange)">+</span></div>
+          <div class="hero-card-desc">Across sectors & geographies</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-label">Client Retention</div>
+          <div class="hero-card-stat">94<span style="color:var(--orange)">%</span></div>
+          <div class="hero-card-desc">Year-over-year retention rate</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRUST / COUNTERS
+     ============================================================ -->
+<section id="trust" aria-label="Our impact in numbers">
+  <div class="trust-inner section-container">
+    <div class="trust-stat reveal">
+      <div class="trust-number">
+        <span class="counter" data-target="200" data-suffix="+">0</span>
+        <span class="accent"></span>
+      </div>
+      <div class="trust-label">Organizations successfully transformed across sectors</div>
+    </div>
+    <div class="trust-stat reveal reveal-delay-2">
+      <div class="trust-number">
+        <span class="counter" data-target="15" data-suffix="+">0</span>
+        <span class="accent"></span>
+      </div>
+      <div class="trust-label">Years of integrated advisory experience</div>
+    </div>
+    <div class="trust-stat reveal reveal-delay-4">
+      <div class="trust-number">
+        <span class="counter" data-target="94" data-suffix="%">0</span>
+        <span class="accent"></span>
+      </div>
+      <div class="trust-label">Client retention rate — a testament to lasting impact</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" aria-label="About PAC">
+  <div class="about-visual reveal">
+    <div class="about-img-block">
+      <div class="about-img-block-inner">
+        <div class="about-abstract">
+          <div class="about-lines"></div>
+          <div class="about-orb"></div>
+          <!-- Abstract composition -->
+          <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 400 500" fill="none" preserveAspectRatio="xMidYMid slice">
+            <circle cx="200" cy="180" r="120" stroke="#EB5733" stroke-width="0.5" stroke-dasharray="4 8" opacity="0.4"/>
+            <circle cx="200" cy="180" r="80" stroke="#131313" stroke-width="0.5" opacity="0.15"/>
+            <line x1="80" y1="180" x2="320" y2="180" stroke="#131313" stroke-width="0.5" opacity="0.12"/>
+            <line x1="200" y1="60" x2="200" y2="300" stroke="#131313" stroke-width="0.5" opacity="0.12"/>
+            <circle cx="200" cy="180" r="6" fill="#EB5733" opacity="0.6"/>
+            <circle cx="200" cy="100" r="3" fill="#131313" opacity="0.2"/>
+            <circle cx="280" cy="180" r="3" fill="#131313" opacity="0.2"/>
+            <circle cx="200" cy="260" r="3" fill="#EB5733" opacity="0.3"/>
+            <rect x="60" y="340" width="280" height="80" fill="#131313" opacity="0.04"/>
+            <text x="200" y="388" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#131313" opacity="0.25" letter-spacing="3">ADVISORY EXCELLENCE</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="about-badge">
+      <div class="about-badge-num">15+</div>
+      <div class="about-badge-text">Years of advisory excellence</div>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <div class="label reveal">Who We Are</div>
+    <h2 class="about-headline reveal reveal-delay-1">A Multidisciplinary Advisory Firm Built for Complexity</h2>
+    <p class="body-lg reveal reveal-delay-2">Priority Activator Consulting is a multidisciplinary advisory firm that helps organizations navigate transformation, strengthen performance, and create sustainable impact. We partner with institutions at critical inflection points — when strategy, capability, and execution must all align.</p>
+    <p class="body-md reveal reveal-delay-3">Whether you lead a corporation, public institution, development organization, or SME, PAC brings integrated expertise to help you move with clarity and confidence through the challenges that matter most.</p>
+
+    <div class="about-pillars reveal reveal-delay-4" role="list">
+      <div class="about-pillar" role="listitem">
+        <div class="pillar-dot" aria-hidden="true"></div>
+        <span class="pillar-name">Business Consulting</span>
+        <span class="pillar-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="about-pillar" role="listitem">
+        <div class="pillar-dot" aria-hidden="true"></div>
+        <span class="pillar-name">Digital Consulting</span>
+        <span class="pillar-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="about-pillar" role="listitem">
+        <div class="pillar-dot" aria-hidden="true"></div>
+        <span class="pillar-name">Development Consulting</span>
+        <span class="pillar-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="about-pillar" role="listitem">
+        <div class="pillar-dot" aria-hidden="true"></div>
+        <span class="pillar-name">Human Resource Consulting</span>
+        <span class="pillar-arrow" aria-hidden="true">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section id="services" aria-label="Our services">
+  <div class="section-container">
+    <div class="services-header reveal">
+      <div class="label">What We Do</div>
+      <h2 class="display-lg" style="margin-top:0.75rem;letter-spacing:-0.025em;">Integrated Advisory Solutions</h2>
+      <p class="body-lg services-intro">Four interconnected consulting pillars — designed to work independently or as a unified advisory framework tailored to your organization's ambitions.</p>
+    </div>
+
+    <!-- Pillar 1: Digital Consulting -->
+    <div class="service-pillar reveal">
+      <div class="pillar-header">
+        <div class="pillar-title-group">
+          <div class="pillar-num">01</div>
+          <h3 class="pillar-title">Digital Consulting</h3>
+        </div>
+        <p class="pillar-desc">Enabling organizations to harness technology and data for competitive advantage and operational excellence.</p>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carousel-1" role="list">
+          <div class="service-card" role="listitem"><div class="service-card-icon">St</div><div class="service-card-name">Strategy &amp; Innovation</div><div class="service-card-desc">Crafting forward-looking digital strategies that align technology investments with organizational vision and market opportunity.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">TA</div><div class="service-card-name">Technology Advisory</div><div class="service-card-desc">Independent guidance on architecture decisions, platform selection, and technology investment to reduce risk and accelerate value.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">CX</div><div class="service-card-name">Customer Experience &amp; UX Design</div><div class="service-card-desc">Designing intuitive digital experiences that deepen customer relationships and drive measurable engagement outcomes.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">DA</div><div class="service-card-name">Data &amp; Analytics</div><div class="service-card-desc">Building data capabilities that transform raw information into decision-ready intelligence across the enterprise.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">DM</div><div class="service-card-name">Digital Marketing &amp; Commerce</div><div class="service-card-desc">Integrated digital marketing strategies that connect brands with audiences and convert engagement into commercial results.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">Ag</div><div class="service-card-name">Agile &amp; DevOps Transformation</div><div class="service-card-desc">Embedding agile methodologies and DevOps culture to accelerate delivery, improve quality, and increase organizational resilience.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">CM</div><div class="service-card-name">Change Management</div><div class="service-card-desc">Guiding organizations and their people through digital transformation with structured approaches to adoption and cultural change.</div></div>
+        </div>
+        <div class="carousel-nav" aria-label="Navigate Digital Consulting services">
+          <button class="carousel-btn" data-carousel="carousel-1" data-dir="-1" aria-label="Previous">←</button>
+          <button class="carousel-btn" data-carousel="carousel-1" data-dir="1" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillar 2: Development Consulting -->
+    <div class="service-pillar reveal">
+      <div class="pillar-header">
+        <div class="pillar-title-group">
+          <div class="pillar-num">02</div>
+          <h3 class="pillar-title">Development Consulting</h3>
+        </div>
+        <p class="pillar-desc">Supporting NGOs, development agencies, and government bodies to design, implement, and measure impactful programs.</p>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carousel-2" role="list">
+          <div class="service-card" role="listitem"><div class="service-card-icon">PD</div><div class="service-card-name">Program Design &amp; Implementation</div><div class="service-card-desc">Developing rigorous, context-responsive programs that translate policy goals into community-level outcomes.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">ME</div><div class="service-card-name">Monitoring &amp; Evaluation (MEAL)</div><div class="service-card-desc">Building MEAL frameworks that ensure accountability, continuous learning, and evidence-based program adaptation.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">RP</div><div class="service-card-name">Research &amp; Policy Analysis</div><div class="service-card-desc">Generating evidence that informs policy design, advocacy efforts, and organizational decision-making.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">SP</div><div class="service-card-name">Strategic Planning &amp; Org. Strengthening</div><div class="service-card-desc">Facilitating strategic planning processes that align institutional capacity with mandate and long-term sustainability.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">AS</div><div class="service-card-name">Advocacy &amp; Stakeholder Engagement</div><div class="service-card-desc">Designing stakeholder engagement strategies that build coalitions, manage narratives, and achieve policy influence.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">GM</div><div class="service-card-name">Grant Management &amp; Resource Mobilization</div><div class="service-card-desc">Strengthening organizational capacity to attract, manage, and report on grant funding from diverse sources.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">CB</div><div class="service-card-name">Capacity Building &amp; Communications</div><div class="service-card-desc">Developing institutional capabilities through targeted training, knowledge transfer, and strategic communication.</div></div>
+        </div>
+        <div class="carousel-nav" aria-label="Navigate Development Consulting services">
+          <button class="carousel-btn" data-carousel="carousel-2" data-dir="-1" aria-label="Previous">←</button>
+          <button class="carousel-btn" data-carousel="carousel-2" data-dir="1" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillar 3: Business Consulting -->
+    <div class="service-pillar reveal">
+      <div class="pillar-header">
+        <div class="pillar-title-group">
+          <div class="pillar-num">03</div>
+          <h3 class="pillar-title">Business Consulting</h3>
+        </div>
+        <p class="pillar-desc">Helping organizations sharpen strategy, improve operations, and build the foundations for sustainable growth.</p>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carousel-3" role="list">
+          <div class="service-card" role="listitem"><div class="service-card-icon">SG</div><div class="service-card-name">Strategy &amp; Growth Planning</div><div class="service-card-desc">Developing clear, actionable strategies that position organizations for competitive advantage and long-term growth.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">OP</div><div class="service-card-name">Operations &amp; Process Excellence</div><div class="service-card-desc">Identifying and eliminating operational inefficiencies to unlock productivity, reduce cost, and improve service quality.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">FA</div><div class="service-card-name">Financial Advisory &amp; Planning</div><div class="service-card-desc">Providing financial modeling, planning, and advisory support to strengthen financial health and investment decisions.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">MR</div><div class="service-card-name">Market Research &amp; Intelligence</div><div class="service-card-desc">Delivering rigorous market insights that reduce uncertainty and sharpen competitive positioning.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">RG</div><div class="service-card-name">Risk Management &amp; Governance</div><div class="service-card-desc">Strengthening governance frameworks and risk management capabilities to protect organizational value.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">IR</div><div class="service-card-name">Investment Readiness &amp; Business Development</div><div class="service-card-desc">Preparing organizations to attract investment and develop new business through robust documentation and commercial strategy.</div></div>
+        </div>
+        <div class="carousel-nav" aria-label="Navigate Business Consulting services">
+          <button class="carousel-btn" data-carousel="carousel-3" data-dir="-1" aria-label="Previous">←</button>
+          <button class="carousel-btn" data-carousel="carousel-3" data-dir="1" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillar 4: HR Consulting -->
+    <div class="service-pillar reveal">
+      <div class="pillar-header">
+        <div class="pillar-title-group">
+          <div class="pillar-num">04</div>
+          <h3 class="pillar-title">Human Resource Consulting</h3>
+        </div>
+        <p class="pillar-desc">Aligning people strategy with organizational ambition to build high-performance, future-ready workforces.</p>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carousel-4" role="list">
+          <div class="service-card" role="listitem"><div class="service-card-icon">HR</div><div class="service-card-name">HR Strategy &amp; Workforce Planning</div><div class="service-card-desc">Designing people strategies that align talent supply with organizational demand today and into the future.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">TM</div><div class="service-card-name">Talent Management</div><div class="service-card-desc">Developing end-to-end talent frameworks that attract, develop, retain, and engage high-performing individuals.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">LD</div><div class="service-card-name">Learning &amp; Development</div><div class="service-card-desc">Designing learning architectures that build critical capabilities, accelerate performance, and prepare leaders for the future.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">CC</div><div class="service-card-name">Culture &amp; Change Management</div><div class="service-card-desc">Shaping organizational culture to enable transformation, improve engagement, and build sustainable high performance.</div></div>
+          <div class="service-card" role="listitem"><div class="service-card-icon">CS</div><div class="service-card-name">Compensation &amp; HR Systems</div><div class="service-card-desc">Designing equitable compensation frameworks and implementing integrated HR systems that support people operations at scale.</div></div>
+        </div>
+        <div class="carousel-nav" aria-label="Navigate HR Consulting services">
+          <button class="carousel-btn" data-carousel="carousel-4" data-dir="-1" aria-label="Previous">←</button>
+          <button class="carousel-btn" data-carousel="carousel-4" data-dir="1" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY PAC
+     ============================================================ -->
+<section id="why" aria-label="Why choose PAC">
+  <div class="why-header">
+    <h2 class="why-headline reveal">Integrated Expertise.<br><em>Measurable</em> Impact.</h2>
+    <div class="why-desc reveal reveal-delay-2">
+      <p>Organizations rarely face isolated challenges. A digital transformation stalls without the right people strategy. A growth plan fails without operational foundations. PAC's integrated model means you have one partner who understands every dimension of your challenge — and designs solutions that work together.</p>
+    </div>
+  </div>
+
+  <div class="why-grid reveal">
+    <div class="why-card" data-num="01">
+      <div class="why-card-accent"></div>
+      <h3 class="why-card-title">Multidisciplinary by Design</h3>
+      <p class="why-card-desc">Our teams draw from business, digital, development, and human capital expertise — eliminating the gaps that single-discipline consultants leave behind.</p>
+    </div>
+    <div class="why-card" data-num="02">
+      <div class="why-card-accent"></div>
+      <h3 class="why-card-title">Context-Responsive Solutions</h3>
+      <p class="why-card-desc">We bring global frameworks but apply them with deep local understanding — designing solutions calibrated to your sector, geography, and organizational culture.</p>
+    </div>
+    <div class="why-card" data-num="03">
+      <div class="why-card-accent"></div>
+      <h3 class="why-card-title">Execution-Oriented Advisory</h3>
+      <p class="why-card-desc">We don't stop at strategy. Our advisory engagements are designed for implementation — ensuring that recommendations translate into tangible, measurable change.</p>
+    </div>
+    <div class="why-card" data-num="04">
+      <div class="why-card-accent"></div>
+      <h3 class="why-card-title">Long-Term Partnership Model</h3>
+      <p class="why-card-desc">Our 94% retention rate reflects a commitment to sustained impact. We build enduring relationships with clients, growing our value as your organization evolves.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INSIGHTS
+     ============================================================ -->
+<section id="insights" aria-label="Insights and thought leadership">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-header-left">
+        <div class="label">Knowledge Leadership</div>
+        <h2 class="section-title">Insights That Drive Better Decisions</h2>
+      </div>
+      <a href="#insights" class="view-all-link">View all insights</a>
+    </div>
+
+    <div class="insights-grid">
+      <article class="insight-card featured reveal">
+        <div class="insight-card-img">
+          <div class="insight-card-img-inner insight-visual-1">
+            <div class="insight-visual-lines"></div>
+            <svg style="position:absolute;bottom:1rem;left:1rem" width="80" height="40" viewBox="0 0 80 40" fill="none">
+              <polyline points="0,35 20,20 35,28 55,8 80,15" stroke="#EB5733" stroke-width="1.5" fill="none"/>
+              <circle cx="55" cy="8" r="3" fill="#EB5733"/>
+            </svg>
+          </div>
+        </div>
+        <div class="insight-card-body">
+          <div class="insight-category">Strategy</div>
+          <h3 class="insight-title">The Integrated Advantage: Why Fragmented Advisory Models Are Failing African Enterprises</h3>
+          <div class="insight-meta">June 2026 · 8 min read</div>
+        </div>
+      </article>
+
+      <article class="insight-card reveal reveal-delay-2">
+        <div class="insight-card-img">
+          <div class="insight-card-img-inner insight-visual-2">
+            <div class="insight-visual-lines"></div>
+          </div>
+        </div>
+        <div class="insight-card-body">
+          <div class="insight-category">Digital</div>
+          <h3 class="insight-title">Beyond Digitization: Building Truly Data-Driven Organizations</h3>
+          <div class="insight-meta">May 2026 · 5 min read</div>
+        </div>
+      </article>
+
+      <article class="insight-card reveal reveal-delay-3">
+        <div class="insight-card-img">
+          <div class="insight-card-img-inner insight-visual-3">
+            <div class="insight-visual-lines"></div>
+          </div>
+        </div>
+        <div class="insight-card-body">
+          <div class="insight-category">Development</div>
+          <h3 class="insight-title">From Compliance to Impact: Rethinking MEAL in Complex Environments</h3>
+          <div class="insight-meta">April 2026 · 6 min read</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EVENTS
+     ============================================================ -->
+<section id="events" aria-label="Upcoming events">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-header-left">
+        <div class="label">Engagements</div>
+        <h2 class="section-title">Upcoming Events &amp; Engagements</h2>
+      </div>
+      <a href="#events" class="view-all-link">View all events</a>
+    </div>
+
+    <div class="events-grid">
+      <article class="event-card reveal">
+        <div class="event-date-block">
+          <div class="event-day">18</div>
+          <div class="event-month-year">Jul<br>2026</div>
+        </div>
+        <div class="event-body">
+          <div class="event-type">Executive Roundtable</div>
+          <h3 class="event-title">Transforming Public Institutions: Strategy, Governance &amp; Digital Readiness</h3>
+          <div class="event-location">
+            <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="#706F6F"/></svg>
+            Nairobi, Kenya · Hybrid
+          </div>
+        </div>
+        <div class="event-register">Register Now <span>→</span></div>
+      </article>
+
+      <article class="event-card reveal reveal-delay-2">
+        <div class="event-date-block">
+          <div class="event-day">05</div>
+          <div class="event-month-year">Aug<br>2026</div>
+        </div>
+        <div class="event-body">
+          <div class="event-type">Masterclass</div>
+          <h3 class="event-title">Building MEAL-Ready Organizations: From Design to Adaptive Management</h3>
+          <div class="event-location">
+            <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="#706F6F"/></svg>
+            Online · Live Webinar
+          </div>
+        </div>
+        <div class="event-register">Register Now <span>→</span></div>
+      </article>
+
+      <article class="event-card reveal reveal-delay-4">
+        <div class="event-date-block">
+          <div class="event-day">22</div>
+          <div class="event-month-year">Sep<br>2026</div>
+        </div>
+        <div class="event-body">
+          <div class="event-type">Conference</div>
+          <h3 class="event-title">The Future of Work in Africa: HR Strategy, Talent &amp; the Digital Transition</h3>
+          <div class="event-location">
+            <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="#706F6F"/></svg>
+            Kigali, Rwanda · In-Person
+          </div>
+        </div>
+        <div class="event-register">Register Now <span>→</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PARTNERS
+     ============================================================ -->
+<section id="partners" aria-label="Our partners">
+  <div class="partners-header reveal">
+    <div class="label">Trusted Partnerships</div>
+    <h2 class="display-md" style="margin-top:0.6rem;color:var(--black)">Organizations We've Partnered With</h2>
+  </div>
+  <div class="partners-grid reveal reveal-delay-2">
+    <div class="partner-item"><div class="partner-logo-mock">UNDP</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">World Bank</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">USAID</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">GIZ</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">DFID</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">AfDB</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">UNICEF</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">IFC</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">EU Aid</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">Mastercard</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">Gates Fdn.</div></div>
+    <div class="partner-item"><div class="partner-logo-mock">Sida</div></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CAREERS
+     ============================================================ -->
+<section id="careers" aria-label="Career opportunities">
+  <div class="careers-content">
+    <div class="label reveal">Join Our Team</div>
+    <h2 class="careers-headline reveal reveal-delay-1">Build Impact<br>With Us</h2>
+    <p class="careers-body reveal reveal-delay-2">PAC brings together exceptional minds from consulting, development, technology, and human capital disciplines. We're a team of practitioners who care deeply about the quality of our work and the impact it creates for our clients and the communities they serve.</p>
+    <p class="careers-body reveal reveal-delay-3">We offer meaningful careers at the intersection of strategy, transformation, and real-world impact — in an environment that values intellectual rigor, diverse perspectives, and professional growth.</p>
+    <div class="reveal reveal-delay-4">
+      <a href="#careers" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+        View Opportunities →
+      </a>
+    </div>
+  </div>
+
+  <div class="careers-visual reveal reveal-delay-2" aria-hidden="true">
+    <div class="careers-visual-bg"></div>
+    <div class="careers-role">
+      <div>
+        <div class="role-title">Senior Consultant — Business Advisory</div>
+        <div class="role-dept">Business Consulting · Full-time</div>
+      </div>
+      <span class="role-arrow">→</span>
+    </div>
+    <div class="careers-role">
+      <div>
+        <div class="role-title">Digital Transformation Specialist</div>
+        <div class="role-dept">Digital Consulting · Full-time</div>
+      </div>
+      <span class="role-arrow">→</span>
+    </div>
+    <div class="careers-role">
+      <div>
+        <div class="role-title">MEAL Advisor</div>
+        <div class="role-dept">Development Consulting · Contract</div>
+      </div>
+      <span class="role-arrow">→</span>
+    </div>
+    <div class="careers-role">
+      <div>
+        <div class="role-title">HR Strategy Consultant</div>
+        <div class="role-dept">HR Consulting · Full-time</div>
+      </div>
+      <span class="role-arrow">→</span>
+    </div>
+    <div class="careers-role">
+      <div>
+        <div class="role-title">Research &amp; Policy Analyst</div>
+        <div class="role-dept">Development Consulting · Full-time</div>
+      </div>
+      <span class="role-arrow">→</span>
+    </div>
+    <div class="careers-cta">
+      <a href="#careers" class="btn-primary" style="display:inline-block;">Explore All Roles →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL CTA
+     ============================================================ -->
+<section id="cta" aria-label="Get in touch">
+  <div class="cta-bg-pattern" aria-hidden="true"></div>
+  <div class="cta-accent" aria-hidden="true"></div>
+  <div class="cta-inner">
+    <div class="label" style="color:rgba(235,87,51,0.8);" aria-hidden="true">Take the Next Step</div>
+    <h2 class="cta-headline reveal">Ready to <em>Transform</em><br>Your Organization?</h2>
+    <p class="cta-body reveal reveal-delay-1">Whether you're navigating a strategic inflection point, building new capabilities, or seeking a long-term advisory partner — PAC is ready to engage. Let's start with a focused strategy conversation.</p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <a href="#footer" class="btn-primary-inv">Schedule a Strategy Consultation</a>
+      <a href="#footer" class="btn-ghost">Request a Proposal</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer" aria-label="Footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg class="footer-logo-svg" viewBox="0 0 346.3 140.96" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-label="Priority Activator Consulting">
+          <defs>
+            <linearGradient id="footer-lg" x1="154.36" y1="83.95" x2="154.36" y2="-44.29" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#eb5733"/>
+              <stop offset="1" stop-color="#eb5733"/>
+            </linearGradient>
+          </defs>
+          <g>
+            <path fill="#eb5733" d="M57.94,23.27c0,4.15-3.79,7.51-8.47,7.51s-8.47-3.36-8.47-7.51,3.79-7.51,8.47-7.51,8.47,3.36,8.47,7.51Z"/>
+            <path fill="#eb5733" d="M101.32,10.24l-39.52,36.82h-.62c-2.19-1.71-4.92-2.72-7.91-2.72s-5.73,1.01-7.91,2.72h-.57l-10.1-10.17h12.3l4.91,4.84,36.6-31.49h12.84Z"/>
+            <path fill="#fff" d="M72.58,80.88l-12.93.34-7.1-5.05-36.32,31.22H2.83l42.1-39.73h.49c2.17,1.67,4.9,2.67,7.85,2.67,2.28,0,4.41-.59,6.27-1.63l13.05,12.18Z"/>
+            <path fill="#fff" d="M108.41,90.3l-.16,11.87-44.15-37.72c1.33-2.04,2.11-4.48,2.11-7.11,0-2.01-.46-3.92-1.27-5.62l14.27-11.73.23,11.47-5.78,6.24,34.75,32.6Z"/>
+            <path fill="#fff" d="M43.05,65.31l-13.64,11.31-.28-11.48,5.75-6.25L0,26.41l.11-11.87,42.24,35.81c-1.29,2.02-2.03,4.42-2.03,6.99,0,3.01,1.02,5.77,2.72,7.97Z"/>
+          </g>
+          <g>
+            <g>
+              <path fill="url(#footer-lg)" d="M154.81,10.95c-.15-.01-.3-.01-.45-.01-.44,0-.87.01-1.3.02-6.93.24-13.34,2.38-18.67,5.89-1.28.84-2.49,1.76-3.64,2.75-.2.17-.41.36-.61.54-1.57,1.43-3,2.98-4.27,4.66-4.09,5.4-6.49,12.02-6.49,19.17s2.4,13.92,6.49,19.53c1.48,2.03,3.18,3.9,5.07,5.58,4.54,4.05,10.16,6.98,16.39,8.25,2.27.47,4.62.72,7.03.72,19.32,0,34.98-15.84,34.98-34.08s-15.42-32.8-34.53-33.02ZM152.78,28.94c5.71,1.53,9.91,6.75,9.91,12.94,0,3.72-1.52,7.09-3.96,9.53-2.31,2.31-5.44,3.79-8.92,3.94-.2.02-.4.02-.61.02h-11.44s-.02-.02-.02-.03v-26.55c.11-.1.23-.21.35-.31h11.2c.7,0,1.39.05,2.06.16.49.07.96.17,1.43.3Z"/>
+              <path fill="#eb5733" d="M154.81,10.95l-.67,5.91-.34,3.02-1.02,9.06c-.47-.13-.94-.23-1.43-.3-.67-.11-1.36-.16-2.06-.16h-11.2c-.12.1-.24.21-.35.31v26.55s.01.03.02.03h11.44c.21,0,.41,0,.61-.02l-1.24,10.98-.31,2.75-.93,8.25v22.46h-30.52V11.24l36.25-.28h1.75Z"/>
+            </g>
+            <g>
+              <path fill="#eb5733" d="M234.26,13.68h-22.3l-34.25,86.11h29.59l1.62-8.42h27.16l2.64,8.42h29.99L234.26,13.68ZM211.31,74.91l5.52-13.84,5.52-13.83,5.53,13.83,5.52,13.84h-22.09Z"/>
+              <path fill="#fff" d="M224.05,20.92h-4.37l-26.22,71.74h3.64l2.5-6.87,45.56.13,2.56,6.74h3.66l-27.33-71.74ZM200.83,82.42l21.02-57.78,22.02,57.9-43.04-.12Z"/>
+            </g>
+            <g>
+              <path fill="#eb5733" d="M343.03,25.44c-6.33-6.38-14.53-10.84-23.54-12.83-9.02-1.98-18.46-1.4-27.12,1.68-8.67,3.08-16.17,8.52-21.56,15.63-5.39,7.11-8.43,15.57-8.73,24.3-.3,8.74,2.15,17.37,7.04,24.79,4.89,7.42,12.01,13.31,20.44,16.92,8.44,3.61,17.82,4.77,26.95,3.34,9.14-1.43,17.62-5.38,24.38-11.36l-17.45-17.59c-3.07,2.72-6.93,4.52-11.09,5.17-4.16.65-8.42.12-12.26-1.52-3.84-1.64-7.07-4.32-9.3-7.7-2.22-3.38-3.34-7.3-3.2-11.28.14-3.97,1.52-7.82,3.97-11.05s5.87-5.71,9.81-7.11c3.94-1.4,8.23-1.67,12.34-.77,4.1.9,7.83,2.93,10.71,5.83l18.63-16.48Z"/>
+              <path fill="#fff" d="M270.85,53.56c1.12-22.16,17.18-35.45,40.43-34.27,10.52.53,18.34,4.98,22.83,9.48l-2.88,2.2c-4.76-4.72-11.52-8.06-20.1-8.49-21.03-1.06-34.54,11.08-35.56,31.31s11.18,34.1,31.66,35.13c9.69.49,17.03-2.13,24.25-7.75l2.66,2.27c-7.23,5.83-15.45,9.26-27.35,8.66-22.41-1.13-37.04-16.39-35.93-38.55Z"/>
+            </g>
+            <path fill="#fff" d="M154.14,16.86c-.14-.01-.29-.01-.43-.01h-27.8s-.04,0-.04.02v79.75h4.85v-27.54h22.85c12.93,0,23.41-10.49,23.41-23.43v-5.53c0-12.72-10.19-23.04-22.84-23.26ZM166.62,59.45c-4.23,4.25-10.09,6.88-16.56,6.88h-19.88s-.04-.02-.04-.04V19.64s.02-.04.04-.04h20.04c1.22,0,2.41.09,3.58.28,11.15,1.71,19.7,11.37,19.7,23.01,0,6.46-2.63,12.33-6.88,16.56Z"/>
+          </g>
+        </svg>
+      </div>
+      <p class="footer-tagline">Helping organizations navigate transformation, strengthen performance, and create sustainable impact.</p>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="rgba(255,255,255,0.4)"/></svg>
+        <a href="#">Nairobi, Kenya</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12v10H1V1zm0 0l6 5 6-5" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" fill="none"/></svg>
+        <a href="mailto:info@priorityactivator.com">info@priorityactivator.com</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="10" height="12" rx="1" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" fill="none"/><line x1="3.5" y1="4.5" x2="8.5" y2="4.5" stroke="rgba(255,255,255,0.4)" stroke-width="1"/><line x1="3.5" y1="7" x2="8.5" y2="7" stroke="rgba(255,255,255,0.4)" stroke-width="1"/><line x1="3.5" y1="9.5" x2="6.5" y2="9.5" stroke="rgba(255,255,255,0.4)" stroke-width="1"/></svg>
+        <a href="#">+254 700 000 000</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">About PAC</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#careers">Careers</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Business Consulting</a></li>
+        <li><a href="#services">Digital Consulting</a></li>
+        <li><a href="#services">Development Consulting</a></li>
+        <li><a href="#services">HR Consulting</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Stay Informed</div>
+      <p style="font-size:0.82rem;margin-bottom:1rem;line-height:1.6;">Subscribe to PAC's advisory newsletter for insights, research, and strategic perspectives.</p>
+      <div class="newsletter-form" role="form" aria-label="Newsletter signup">
+        <input type="email" class="newsletter-input" placeholder="Your email address" aria-label="Email address">
+        <button class="newsletter-btn" type="button">Subscribe →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copyright">© 2026 Priority Activator Consulting. All rights reserved.</p>
+    <div class="footer-socials" aria-label="Follow PAC on social media">
+      <!-- LinkedIn -->
+      <a href="#" class="social-icon" aria-label="Follow PAC on LinkedIn" title="LinkedIn">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M1.5 0C.67 0 0 .67 0 1.5v11C0 13.33.67 14 1.5 14h11c.83 0 1.5-.67 1.5-1.5v-11C14 .67 13.33 0 12.5 0h-11zM4 11H2V5h2v6zM3 4.1a1.15 1.15 0 110-2.3 1.15 1.15 0 010 2.3zm9 6.9h-2V7.5c0-.69-.31-1.1-.87-1.1-.66 0-1.13.45-1.13 1.5V11H6V5h2v.9c.34-.63 1.06-1.05 1.97-1.05C11.08 4.85 12 5.87 12 7.5V11z"/></svg>
+      </a>
+      <!-- Facebook -->
+      <a href="#" class="social-icon" aria-label="Follow PAC on Facebook" title="Facebook">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M14 7.07A7 7 0 100 7.07C0 10.5 2.55 13.33 5.9 13.9v-4.8H4.12V7.07H5.9V5.52c0-1.77.99-2.74 2.6-2.74.75 0 1.54.14 1.54.14v1.74h-.87c-.85 0-1.12.54-1.12 1.08v1.33h1.9l-.3 2.03H8.05v4.8A7.02 7.02 0 0014 7.07z"/></svg>
+      </a>
+      <!-- Instagram -->
+      <a href="#" class="social-icon" aria-label="Follow PAC on Instagram" title="Instagram">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1.26c1.87 0 2.09.01 2.83.04.68.03 1.05.14 1.3.23.32.13.56.28.8.52.24.24.4.48.52.8.09.25.2.62.23 1.3.03.74.04.96.04 2.83s-.01 2.09-.04 2.83c-.03.68-.14 1.05-.23 1.3-.13.32-.28.56-.52.8a2.15 2.15 0 01-.8.52c-.25.09-.62.2-1.3.23-.74.03-.96.04-2.83.04s-2.09-.01-2.83-.04c-.68-.03-1.05-.14-1.3-.23a2.15 2.15 0 01-.8-.52 2.15 2.15 0 01-.52-.8c-.09-.25-.2-.62-.23-1.3C1.27 9.09 1.26 8.87 1.26 7s.01-2.09.04-2.83c.03-.68.14-1.05.23-1.3.13-.32.28-.56.52-.8.24-.24.48-.4.8-.52.25-.09.62-.2 1.3-.23.74-.03.96-.04 2.83-.04M7 0C5.1 0 4.87.01 4.12.04c-.75.03-1.26.15-1.7.32A3.44 3.44 0 001.2 1.2 3.44 3.44 0 00.36 2.42C.19 2.86.07 3.37.04 4.12.01 4.87 0 5.1 0 7c0 1.9.01 2.13.04 2.88.03.75.15 1.26.32 1.7.18.44.42.82.84 1.24.42.42.8.66 1.24.84.44.17.95.29 1.7.32C4.87 13.99 5.1 14 7 14s2.13-.01 2.88-.04c.75-.03 1.26-.15 1.7-.32a3.44 3.44 0 001.24-.84 3.44 3.44 0 00.84-1.24c.17-.44.29-.95.32-1.7.03-.75.04-.98.04-2.88 0-1.9-.01-2.13-.04-2.88-.03-.75-.15-1.26-.32-1.7A3.44 3.44 0 0012.8 1.2 3.44 3.44 0 0011.58.36C11.14.19 10.63.07 9.88.04 9.13.01 8.9 0 7 0zm0 3.41a3.59 3.59 0 100 7.18A3.59 3.59 0 007 3.41zM7 9.33A2.33 2.33 0 114.67 7 2.33 2.33 0 017 9.33zm4.57-5.12a.84.84 0 11-1.68 0 .84.84 0 011.68 0z"/></svg>
+      </a>
+      <!-- TikTok -->
+      <a href="#" class="social-icon" aria-label="Follow PAC on TikTok" title="TikTok">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M11.5 3.2c-.8-.5-1.4-1.3-1.6-2.2H8.1v8.7c0 .9-.7 1.6-1.6 1.6S4.9 10.6 4.9 9.7s.7-1.6 1.6-1.6c.2 0 .4 0 .6.1V6.3c-.2 0-.4-.1-.6-.1C4 6.2 2.3 7.9 2.3 9.7c0 1.9 1.7 3.3 3.8 3.3s3.8-1.5 3.8-3.3V5.4c.8.6 1.7 1 2.8 1V4.6c-.4 0-1.2-.5-1.2-1.4z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* ============================================================
+   NAV: Scroll elevation + mobile menu
+   ============================================================ */
+const nav = document.getElementById('nav');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', isOpen);
+  const spans = hamburger.querySelectorAll('span');
+  if (isOpen) {
+    spans[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+  } else {
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  }
+});
+
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  });
+});
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ============================================================
+   COUNTER ANIMATION
+   ============================================================ */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target, 10);
+  const suffix = el.dataset.suffix || '';
+  const duration = 2000;
+  const start = performance.now();
+
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(eased * target);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+/* ============================================================
+   CAROUSEL: Drag + button scroll
+   ============================================================ */
+document.querySelectorAll('.carousel-track').forEach(track => {
+  let isDragging = false;
+  let startX, scrollLeft;
+
+  track.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+    track.style.cursor = 'grabbing';
+  });
+  track.addEventListener('mouseleave', () => { isDragging = false; track.style.cursor = 'grab'; });
+  track.addEventListener('mouseup', () => { isDragging = false; track.style.cursor = 'grab'; });
+  track.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    track.scrollLeft = scrollLeft - walk;
+  });
+
+  // Touch support
+  let touchStartX, touchScrollLeft;
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].pageX;
+    touchScrollLeft = track.scrollLeft;
+  }, { passive: true });
+  track.addEventListener('touchmove', (e) => {
+    const x = e.touches[0].pageX;
+    const walk = (touchStartX - x) * 1.2;
+    track.scrollLeft = touchScrollLeft + walk;
+  }, { passive: true });
+});
+
+document.querySelectorAll('.carousel-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const trackId = btn.dataset.carousel;
+    const dir = parseInt(btn.dataset.dir, 10);
+    const track = document.getElementById(trackId);
+    const cardWidth = track.querySelector('.service-card')?.offsetWidth || 280;
+    track.scrollBy({ left: dir * (cardWidth + 20), behavior: 'smooth' });
+  });
+});
+
+/* ============================================================
+   NEWSLETTER FORM
+   ============================================================ */
+document.querySelector('.newsletter-btn')?.addEventListener('click', function() {
+  const input = document.querySelector('.newsletter-input');
+  if (!input || !input.value.trim()) return;
+  const email = input.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    input.style.borderColor = '#EB5733';
+    return;
+  }
+  input.value = '';
+  this.textContent = 'Subscribed ✓';
+  this.style.background = '#2e7d32';
+  input.placeholder = 'Thank you for subscribing!';
+  setTimeout(() => {
+    this.textContent = 'Subscribe →';
+    this.style.background = '';
+    input.placeholder = 'Your email address';
+    input.style.borderColor = '';
+  }, 4000);
+});
+</script>
+
+</body>
+</html>
