@@ -34,7 +34,7 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  font-family: var(--font-body);
+  font-family:Arial, Helvetica, sans-serif;
   background: var(--white);
   color: var(--black);
   line-height: 1.6;
@@ -138,6 +138,138 @@ ul { list-style: none; }
   align-items: center;
   gap: 2rem;
 }
+/* ── Dropdown base ── */
+.nav-links .dropdown {
+  position: relative;
+}
+
+.nav-links .dropdown > a {
+  cursor: pointer;
+}
+
+/* Standard dropdown panel */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  background: rgba(10, 10, 10, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 0;
+  z-index: 1000;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+  color: #eb5733;
+  background: rgba(235, 87, 51, 0.08);
+}
+
+/* Mega menu panel */
+/* Mega menu panel — anchored to full nav width */
+.mega-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(19, 19, 19, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 28px 5% 24px;
+  z-index: 999;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.5);
+}
+
+.dropdown:hover .mega-menu {
+  display: grid;
+}
+
+
+.mega-column {
+  padding: 0 20px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+.mega-column:first-child {
+  padding-left: 4px;
+}
+
+.mega-column:last-child {
+  border-right: none;
+  padding-right: 4px;
+}
+
+.mega-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #eb5733;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(235, 87, 51, 0.25);
+}
+
+.mega-column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mega-column ul li a {
+  display: block;
+  padding: 6px 0;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.68);
+  text-decoration: none;
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+
+.mega-column ul li a:hover {
+  color: #eb5733;
+}
+
+/* ── Show on hover ── */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown:hover .mega-menu {
+  display: grid;
+}
+
+/* Invisible bridge so cursor moving into menu doesn't close it */
+.dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
 .nav-links a {
   font-size: 0.875rem;
   font-weight: 500;
@@ -168,19 +300,7 @@ ul { list-style: none; }
   background: var(--orange-dark);
   transform: translateY(-1px);
 }
-.btn-secondary {
-  border: 1.5px solid var(--black);
-  color: var(--black);
-  padding: 0.65rem 1.4rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: border-color 0.25s, color 0.25s, transform 0.2s;
-}
-.btn-secondary:hover {
-  border-color: var(--orange);
-  color: var(--orange);
-  transform: translateY(-1px);
-}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -404,7 +524,88 @@ ul { list-style: none; }
   0%, 100% { opacity: 0.4; transform: scaleY(1); }
   50% { opacity: 1; transform: scaleY(1.1); }
 }
+.header__image {
+  position: relative;
+  isolation: isolate;
+}
 
+.header__image::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  max-width: 550px;
+  aspect-ratio: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("assets/header-bg.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  opacity: 0.5;
+  z-index: -1;
+}
+.header__image img {
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.header__image__card {
+  position: absolute;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  background-color: var(--white);
+  white-space: nowrap;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.header__image__card span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.header__image__card-1 {
+  top: 25%;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.header__image__card-2 {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header__image__card-3 {
+  top: 60%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.header__image__card-4 {
+  top: 25%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.header__image__card-5 {
+  bottom: 0;
+  left: 60%;
+  transform: translate(-50%, 50%);
+}
+.header__image__card-6 {
+  top: 60%;
+  right: 0;
+  transform: translateY(-50%);
+}
 /* ============================================================
    TRUST / STATS SECTION
    ============================================================ */
@@ -587,7 +788,7 @@ ul { list-style: none; }
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border);
 }
-.pillar-title-group {}
+.pillar-title-group 
 .pillar-num {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -777,7 +978,7 @@ ul { list-style: none; }
   justify-content: space-between;
   margin-bottom: 3.5rem;
 }
-.section-header-left {}
+
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 3vw, 2.6rem);
@@ -1361,18 +1562,88 @@ footer {
     </a>
 
     <ul class="nav-links" role="list">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#insights">Insights</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#careers">Careers</a></li>
-      <li><a href="#footer">Contact</a></li>
-    </ul>
+      <ul class="nav-links" role="list">
+  <li><a href="#hero">Home</a></li>
 
-    <a href="#cta" class="btn-primary nav-cta" style="display:inline-flex;align-items:center;gap:6px;">
-      Schedule a Strategy Consultation
-    </a>
+  <!-- ABOUT DROPDOWN -->
+  <li class="dropdown">
+    <a href="#about">About ▾</a>
+    <div class="dropdown-menu">
+      <a href="#mission-vision">Mission &amp; Vision</a>
+      <a href="#who-we-are">Who Are We</a>
+      <a href="#our-focus">Our Focus</a>
+      <a href="#partners">Our Partners</a>
+    </div>
+  </li>
+
+  <!-- SERVICES MEGA DROPDOWN -->
+  <li class="dropdown mega-dropdown">
+    <a href="services.html">Services ▾</a>
+    <div class="mega-menu">
+      <div class="mega-column">
+        <h4 class="mega-heading">Digital Consulting</h4>
+        <ul>
+          <li><a href="#">Strategy &amp; Innovation</a></li>
+          <li><a href="#">Technology Advisory</a></li>
+          <li><a href="#">Customer Experience &amp; UX Design</a></li>
+          <li><a href="#">Data &amp; Analytics</a></li>
+          <li><a href="#">Digital Marketing &amp; Commerce</a></li>
+          <li><a href="#">Agile &amp; DevOps Transformation</a></li>
+          <li><a href="#">Change Management</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h4 class="mega-heading">Development Consulting</h4>
+        <ul>
+          <li><a href="#">Program Design &amp; Implementation</a></li>
+          <li><a href="#">Monitoring &amp; Evaluation (MEAL)</a></li>
+          <li><a href="#">Research &amp; Policy Analysis</a></li>
+          <li><a href="#">Strategic Planning &amp; Org. Strengthening</a></li>
+          <li><a href="#">Advocacy &amp; Stakeholder Engagement</a></li>
+          <li><a href="#">Grant Management &amp; Resource Mobilization</a></li>
+          <li><a href="#">Capacity Building &amp; Communications</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h4 class="mega-heading">Business Consulting</h4>
+        <ul>
+          <li><a href="#">Strategy &amp; Growth Planning</a></li>
+          <li><a href="#">Operations &amp; Process Excellence</a></li>
+          <li><a href="#">Financial Advisory &amp; Planning</a></li>
+          <li><a href="#">Market Research &amp; Intelligence</a></li>
+          <li><a href="#">Risk Management &amp; Governance</a></li>
+          <li><a href="#">Investment Readiness &amp; Business Development</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h4 class="mega-heading">HR Consulting</h4>
+        <ul>
+          <li><a href="#">HR Strategy &amp; Workforce Planning</a></li>
+          <li><a href="#">Talent Management</a></li>
+          <li><a href="#">Learning &amp; Development</a></li>
+          <li><a href="#">Culture &amp; Change Management</a></li>
+          <li><a href="#">Compensation &amp; HR Systems</a></li>
+        </ul>
+      </div>
+    </div>
+  </li>
+
+ 
+  <!-- EVENTS DROPDOWN -->
+  <li class="dropdown">
+    <a href="#events">Events ▾</a>
+    <div class="dropdown-menu">
+      <a href="#workshops">Workshops</a>
+      <a href="#insights-events">Insights</a>
+    </div>
+  </li>
+
+ 
+  <li><a href="#footer">Contact</a></li>
+</ul>
+      
+
+   
 
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1384,9 +1655,7 @@ footer {
   <a href="#hero">Home</a>
   <a href="#about">About</a>
   <a href="#services">Services</a>
-  <a href="#insights">Insights</a>
   <a href="#events">Events</a>
-  <a href="#careers">Careers</a>
   <a href="#footer">Contact</a>
   <a href="#cta" class="btn-primary">Schedule a Strategy Consultation</a>
 </div>
@@ -1396,58 +1665,49 @@ footer {
      ============================================================ -->
 <section id="hero" aria-label="Hero">
   <div class="hero-content">
-    <div class="hero-eyebrow reveal">
-      <span class="label">Advisory &amp; Transformation</span>
-    </div>
-
+    
     <h1 class="hero-headline reveal reveal-delay-1">
-      Organizational<br>Development<br>with <em>Real-World</em><br>Impact
+      Advisory<br>with Real-World Impact
     </h1>
 
     <p class="hero-body reveal reveal-delay-2">
-      PAC partners with organizations to navigate complexity, strengthen performance, and create measurable impact — through integrated advisory expertise spanning business, digital, development, and human capital.
+      PAC partners with organizations to navigate complexity, strengthen performance, and create measurable impact through integrated advisory expertise spanning business, digital, development, and human capital.
     </p>
 
     <div class="hero-actions reveal reveal-delay-3">
-      <a href="#cta" class="btn-primary">Schedule a Strategy Consultation</a>
-      <a href="#cta" class="btn-secondary">Request a Proposal</a>
+      <a href="#cta" class="btn-primary">Check our Job postings</a>
+      <a href="#cta" class="btn-primary">Book Consultation</a>
     </div>
   </div>
 
-  <div class="hero-visual" aria-hidden="true">
-    <div class="hero-img-bg"></div>
-    <div class="hero-abstract">
-      <div class="hero-grid-lines"></div>
-      <div class="hero-circle-1"></div>
-      <div class="hero-circle-2"></div>
-      <div class="hero-accent-line"></div>
-      <div class="hero-dot-grid">
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-    </div>
-    <div class="hero-tag">Integrated Advisory</div>
-    <div class="hero-visual-inner">
-      <div class="hero-cards-row">
-        <div class="hero-card">
-          <div class="hero-card-label">Organizations Served</div>
-          <div class="hero-card-stat">200<span style="color:var(--orange)">+</span></div>
-          <div class="hero-card-desc">Across sectors & geographies</div>
+  <header class="header__container">
+      <div class="header__image">
+        <div class="header__image__card header__image__card-1">
+          <span><i class="ri-key-line"></i></span>
+          Strategy and Operations
         </div>
-        <div class="hero-card">
-          <div class="hero-card-label">Client Retention</div>
-          <div class="hero-card-stat">94<span style="color:var(--orange)">%</span></div>
-          <div class="hero-card-desc">Year-over-year retention rate</div>
+        <div class="header__image__card header__image__card-2">
+          <span><i class="ri-passport-line"></i></span>
+          Governance and Policies
         </div>
+        <div class="header__image__card header__image__card-3">
+          <span><i class="ri-map-2-line"></i></span>
+          Finance and Compliance
+        </div>
+        <div class="header__image__card header__image__card-4">
+          <span><i class="ri-guide-line"></i></span>
+          Business Inteligence
+        </div>
+        <div class="header__image__card header__image__card-5">
+          <span><i class="ri-guide-line"></i></span>
+          Organisational Design
+        </div>
+        <div class="header__image__card header__image__card-6">
+          <span><i class="ri-guide-line"></i></span>
+          Development Consulting
+        </div>
+        <img src="image 1.jpg" alt="header" />
       </div>
-    </div>
-    <div class="hero-scroll-indicator">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </div>
 </section>
 
 <!-- ============================================================
