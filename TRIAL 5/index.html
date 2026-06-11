@@ -14,11 +14,8 @@
    ============================================================ */
 :root {
   --orange: #EB5733;
-  --orange-dark: #c94420;
   --black: #131313;
   --grey: #706F6F;
-  --grey-light: #A8A8A8;
-  --grey-bg: #F5F4F2;
   --white: #FFFFFF;
   --border: #E8E6E2;
   --font-display: 'Playfair Display', Georgia, serif;
@@ -77,8 +74,8 @@ ul { list-style: none; }
   text-transform: uppercase;
   color: var(--orange);
 }
-.body-lg { font-size: 1.1rem; line-height: 1.75; color: var(--grey); font-weight: 300; }
-.body-md { font-size: 0.95rem; line-height: 1.7; color: var(--grey); }
+.body-lg { font-size: 1.1rem; line-height: 1.75; color: var(--black); font-weight: 300; }
+.body-md { font-size: 0.95rem; line-height: 1.7; color: var(--black); }
 
 /* ============================================================
    SCROLL REVEAL
@@ -150,6 +147,7 @@ ul { list-style: none; }
 /* Standard dropdown panel */
 .dropdown-menu {
   display: none;
+  flex-direction: column; /* add this */
   position: absolute;
   top: calc(100% + 10px);
   left: 50%;
@@ -167,18 +165,21 @@ ul { list-style: none; }
 
 .dropdown-menu a {
   display: block;
+  width: 100%;
   padding: 10px 20px;
-  color: rgba(255, 255, 255, 0.78);
   font-size: 0.88rem;
-  letter-spacing: 0.02em;
+  color: whitesmoke;
   text-decoration: none;
   transition: color 0.2s, background 0.2s;
   white-space: nowrap;
+  line-height: 1.4;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .dropdown-menu a:hover {
-  color: #eb5733;
-  background: rgba(235, 87, 51, 0.08);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.18);
 }
 
 /* Mega menu panel */
@@ -242,16 +243,26 @@ ul { list-style: none; }
   display: block;
   padding: 6px 0;
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.68);
+  color: whitesmoke;
   text-decoration: none;
   transition: color 0.2s;
   line-height: 1.4;
 }
-
-.mega-column ul li a:hover {
-  color: #eb5733;
+.mega-column ul li a {
+  display: block;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  color: whitesmoke;
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  line-height: 1.4;
+  border-radius: 4px;
 }
 
+.mega-column ul li a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
 /* ── Show on hover ── */
 .dropdown:hover .dropdown-menu {
   display: block;
@@ -273,7 +284,7 @@ ul { list-style: none; }
 .nav-links a {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--black);
+  color: var(--blac);
   position: relative;
   padding-bottom: 2px;
 }
@@ -297,7 +308,7 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 .btn-primary:hover {
-  background: var(--orange-dark);
+  background: #131313;
   transform: translateY(-1px);
 }
 
@@ -528,6 +539,58 @@ ul { list-style: none; }
   position: relative;
   isolation: isolate;
 }
+.header__container {
+  position: relative;
+  overflow: hidden;
+}
+.header__bg-video {
+  position: absolute;
+  
+}
+
+.header__image {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
+.header__image__card {
+  z-index: 2;
+}
+/* Orbs */
+.header__container::before,
+.header__container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: float-orb 8s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.header__container::before {
+  width: 500px;
+  height: 500px;
+  background: #eb5733;
+  top: -100px;
+  left: -100px;
+}
+
+.header__container::after {
+  width: 400px;
+  height: 400px;
+  background: #eb5733;
+  bottom: -100px;
+  right: -100px;
+  animation-delay: -4s;
+}
+
+@keyframes float-orb {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, 40px) scale(1.1); }
+}
+
 
 .header__image::before {
   position: absolute;
@@ -546,9 +609,33 @@ ul { list-style: none; }
   opacity: 0.5;
   z-index: -1;
 }
+.header__image {
+  position: relative;
+  z-index: 5; /* above the video */
+  isolation: isolate;
+}
+.header__bg-video {
+  position: fixed; /* changed from absolute → fills the full viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1; /* changed from 0.4 → full clarity */
+}
 .header__image img {
   max-width: 520px;
   margin-inline: auto;
+}
+.header__image img {
+  max-width: 520px;
+  width: 520px;
+  height: 520px;
+  margin-inline: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 .header__image__card {
@@ -564,9 +651,40 @@ ul { list-style: none; }
   white-space: nowrap;
   border-radius: 5px;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 10; /* changed from 1 to 10 */
+}
+.header__image__card {
+  animation: card-float 4s ease-in-out infinite;
 }
 
+/* Each card floats at a slightly different speed */
+.header__image__card-1 { animation-duration: 4s; }
+.header__image__card-2 { animation-duration: 5s; animation-delay: -1s; }
+.header__image__card-3 { animation-duration: 4.5s; animation-delay: -2s; }
+.header__image__card-4 { animation-duration: 5.5s; animation-delay: -0.5s; }
+.header__image__card-5 { animation-duration: 4.2s; animation-delay: -1.5s; }
+.header__image__card-6 { animation-duration: 5.2s; animation-delay: -3s; }
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(-50%); }
+  50%       { transform: translateY(calc(-50% - 12px)); }
+}
+@keyframes card-float-center {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50%       { transform: translate(-50%, calc(-50% - 12px)); }
+}
+.header__image__card-2,
+.header__image__card-5 {
+  animation-name: card-float-center;
+}
+.header__image__card-1,
+.header__image__card-2,
+.header__image__card-5 {
+  animation-name: card-float-center;
+}
+.header__image__card {
+  animation: card-float 4s ease-in-out infinite;
+}
 .header__image__card span {
   font-size: 1.5rem;
   font-weight: 600;
@@ -655,6 +773,79 @@ ul { list-style: none; }
   max-width: 1440px;
   margin: 0 auto;
 }
+/* Modal Overlay */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+/* Modal Box */
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #131313;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 480px;
+  width: 90%;
+  z-index: 2001;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+
+.modal-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #eb5733;
+  margin-bottom: 0.75rem;
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.modal-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover { color: white; }
+
+/* Active states */
+.modal-overlay.active { display: block; }
+.modal.active { display: block; }
+
+/* Make pillar names look clickable */
+.about-pillar .pillar-name {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.about-pillar .pillar-name:hover { color: #eb5733; }
 .about-visual {
   position: relative;
 }
@@ -712,7 +903,7 @@ ul { list-style: none; }
 }
 .about-badge-text {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.7);
+  color: rgba(14, 13, 13, 0.7);
   margin-top: 0.4rem;
   line-height: 1.4;
 }
@@ -768,6 +959,38 @@ ul { list-style: none; }
 #services {
   background: var(--grey-bg);
   padding: 8rem 5%;
+}
+#services {
+  position: relative;
+  overflow: hidden;
+  background: var(--grey-bg);
+  padding: 8rem 5%;
+}
+
+.services__bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* Dark overlay so text stays readable */
+#services::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+/* Lifts all content above the video */
+#services .section-container {
+  position: relative;
+  z-index: 2;
 }
 .services-header {
   max-width: 680px;
@@ -1360,10 +1583,12 @@ ul { list-style: none; }
    FOOTER
    ============================================================ */
 footer {
-  background: var(--black);
+  position: relative;
+  overflow: hidden;
   border-top: 1px solid rgba(255,255,255,0.08);
   padding: 5rem 5% 2.5rem;
   color: rgba(255,255,255,0.6);
+  /* no background color here */
 }
 .footer-grid {
   display: grid;
@@ -1372,7 +1597,39 @@ footer {
   padding-bottom: 3.5rem;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-.footer-brand {}
+.footer__bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.4; /* video shows through but dimmed */
+}
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55); /* lighter than before */
+  z-index: 0;
+}
+
+/* Dark overlay so text stays readable */
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 0;
+}
+
+/* Lifts all footer content above the overlay */
+footer > * {
+  position: relative;
+  z-index: 1;
+}
+
 .footer-logo {
   margin-bottom: 1.25rem;
 }
@@ -1566,16 +1823,16 @@ footer {
   <li><a href="#hero">Home</a></li>
 
   <!-- ABOUT DROPDOWN -->
-  <li class="dropdown">
-    <a href="#about">About ▾</a>
-    <div class="dropdown-menu">
-      <a href="#mission-vision">Mission &amp; Vision</a>
-      <a href="#who-we-are">Who Are We</a>
-      <a href="#our-focus">Our Focus</a>
-      <a href="#partners">Our Partners</a>
-    </div>
-  </li>
-
+   
+ <li class="dropdown">
+  <a href="#about">About ▾</a>
+  <div class="dropdown-menu">
+    <a href="#about" onclick="openModal('mission'); return false;">Mission & Vision</a>
+    <a href="#about" onclick="openModal('vision'); return false;">Who Are We</a>
+    <a href="#about" onclick="openModal('focus'); return false;">Our Focus</a>
+    
+  </div>
+</li>
   <!-- SERVICES MEGA DROPDOWN -->
   <li class="dropdown mega-dropdown">
     <a href="services.html">Services ▾</a>
@@ -1630,14 +1887,13 @@ footer {
 
  
   <!-- EVENTS DROPDOWN -->
-  <li class="dropdown">
-    <a href="#events">Events ▾</a>
-    <div class="dropdown-menu">
-      <a href="#workshops">Workshops</a>
-      <a href="#insights-events">Insights</a>
-    </div>
-  </li>
-
+<li class="dropdown">
+  <a href="#events">Events ▾</a>
+  <div class="dropdown-menu">
+    <a href="#events">Workshops</a>
+    <a href="#insights">Insights</a>
+  </div>
+</li>
  
   <li><a href="#footer">Contact</a></li>
 </ul>
@@ -1664,6 +1920,7 @@ footer {
      HERO
      ============================================================ -->
 <section id="hero" aria-label="Hero">
+  <canvas id="particle-canvas"></canvas>
   <div class="hero-content">
     
     <h1 class="hero-headline reveal reveal-delay-1">
@@ -1679,34 +1936,8 @@ footer {
       <a href="#cta" class="btn-primary">Book Consultation</a>
     </div>
   </div>
+ 
 
-  <header class="header__container">
-      <div class="header__image">
-        <div class="header__image__card header__image__card-1">
-          <span><i class="ri-key-line"></i></span>
-          Strategy and Operations
-        </div>
-        <div class="header__image__card header__image__card-2">
-          <span><i class="ri-passport-line"></i></span>
-          Governance and Policies
-        </div>
-        <div class="header__image__card header__image__card-3">
-          <span><i class="ri-map-2-line"></i></span>
-          Finance and Compliance
-        </div>
-        <div class="header__image__card header__image__card-4">
-          <span><i class="ri-guide-line"></i></span>
-          Business Inteligence
-        </div>
-        <div class="header__image__card header__image__card-5">
-          <span><i class="ri-guide-line"></i></span>
-          Organisational Design
-        </div>
-        <div class="header__image__card header__image__card-6">
-          <span><i class="ri-guide-line"></i></span>
-          Development Consulting
-        </div>
-        <img src="image 1.jpg" alt="header" />
       </div>
 </section>
 
@@ -1734,7 +1965,7 @@ footer {
         <span class="counter" data-target="94" data-suffix="%">0</span>
         <span class="accent"></span>
       </div>
-      <div class="trust-label">Client retention rate — a testament to lasting impact</div>
+      <div class="trust-label">Client retention rate a testament to lasting impact</div>
     </div>
   </div>
 </section>
@@ -1749,6 +1980,13 @@ footer {
         <div class="about-abstract">
           <div class="about-lines"></div>
           <div class="about-orb"></div>
+          <section class="second-section">
+  <video class="header__bg-video" autoplay muted loop playsinline>
+    <source src="video1.mp4" type="video/mp4">
+  </video>
+
+  <!-- rest of your section content -->
+</section>
           <!-- Abstract composition -->
           <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 400 500" fill="none" preserveAspectRatio="xMidYMid slice">
             <circle cx="200" cy="180" r="120" stroke="#EB5733" stroke-width="0.5" stroke-dasharray="4 8" opacity="0.4"/>
@@ -1765,47 +2003,46 @@ footer {
         </div>
       </div>
     </div>
-    <div class="about-badge">
-      <div class="about-badge-num">15+</div>
-      <div class="about-badge-text">Years of advisory excellence</div>
-    </div>
+    
   </div>
 
   <div class="about-content">
     <div class="label reveal">Who We Are</div>
     <h2 class="about-headline reveal reveal-delay-1">A Multidisciplinary Advisory Firm Built for Complexity</h2>
-    <p class="body-lg reveal reveal-delay-2">Priority Activator Consulting is a multidisciplinary advisory firm that helps organizations navigate transformation, strengthen performance, and create sustainable impact. We partner with institutions at critical inflection points — when strategy, capability, and execution must all align.</p>
+    <p class="body-lg reveal reveal-delay-2">Priority Activator Consulting is a multidisciplinary advisory firm that helps organizations navigate transformation, strengthen performance, and create sustainable impact. We partner with institutions at critical inflection points when strategy, capability, and execution must all align.</p>
     <p class="body-md reveal reveal-delay-3">Whether you lead a corporation, public institution, development organization, or SME, PAC brings integrated expertise to help you move with clarity and confidence through the challenges that matter most.</p>
 
+
     <div class="about-pillars reveal reveal-delay-4" role="list">
-      <div class="about-pillar" role="listitem">
-        <div class="pillar-dot" aria-hidden="true"></div>
-        <span class="pillar-name">Business Consulting</span>
-        <span class="pillar-arrow" aria-hidden="true">→</span>
-      </div>
-      <div class="about-pillar" role="listitem">
-        <div class="pillar-dot" aria-hidden="true"></div>
-        <span class="pillar-name">Digital Consulting</span>
-        <span class="pillar-arrow" aria-hidden="true">→</span>
-      </div>
-      <div class="about-pillar" role="listitem">
-        <div class="pillar-dot" aria-hidden="true"></div>
-        <span class="pillar-name">Development Consulting</span>
-        <span class="pillar-arrow" aria-hidden="true">→</span>
-      </div>
-      <div class="about-pillar" role="listitem">
-        <div class="pillar-dot" aria-hidden="true"></div>
-        <span class="pillar-name">Human Resource Consulting</span>
-        <span class="pillar-arrow" aria-hidden="true">→</span>
-      </div>
-    </div>
+  <div class="about-pillar" role="listitem">
+    <div class="pillar-dot" aria-hidden="true"></div>
+    <span class="pillar-name" onclick="openModal('mission')">Mission</span>
+    <span class="pillar-arrow" aria-hidden="true">→</span>
   </div>
+  <div class="about-pillar" role="listitem">
+    <div class="pillar-dot" aria-hidden="true"></div>
+    <span class="pillar-name" onclick="openModal('vision')">Vision</span>
+    <span class="pillar-arrow" aria-hidden="true">→</span>
+  </div>
+  <div class="about-pillar" role="listitem">
+  <div class="pillar-dot" aria-hidden="true"></div>
+  <a href="#partners"><span class="pillar-name">Our Partners</span></a>
+  <span class="pillar-arrow" aria-hidden="true">→</span>
+</div>
+  <div class="about-pillar" role="listitem">
+    <div class="pillar-dot" aria-hidden="true"></div>
+    <span class="pillar-name" onclick="openModal('focus')">Our Focus</span>
+    <span class="pillar-arrow" aria-hidden="true">→</span>
+  </div>
+</div>
 </section>
 
 <!-- ============================================================
      SERVICES
      ============================================================ -->
 <section id="services" aria-label="Our services">
+  <!-- Background Video -->
+
   <div class="section-container">
     <div class="services-header reveal">
       <div class="label">What We Do</div>
@@ -1813,141 +2050,62 @@ footer {
       <p class="body-lg services-intro">Four interconnected consulting pillars — designed to work independently or as a unified advisory framework tailored to your organization's ambitions.</p>
     </div>
 
-    <!-- Pillar 1: Digital Consulting -->
+    <!-- Single Pillar -->
     <div class="service-pillar reveal">
       <div class="pillar-header">
         <div class="pillar-title-group">
           <div class="pillar-num">01</div>
-          <h3 class="pillar-title">Digital Consulting</h3>
+          <h3 class="pillar-title">Our Services</h3>
         </div>
-        <p class="pillar-desc">Enabling organizations to harness technology and data for competitive advantage and operational excellence.</p>
+        <p class="pillar-desc">Delivering integrated advisory solutions across governance, strategy, finance, and organizational design.</p>
       </div>
       <div class="carousel-wrapper">
         <div class="carousel-track" id="carousel-1" role="list">
-          <div class="service-card" role="listitem"><div class="service-card-icon">St</div><div class="service-card-name">Strategy &amp; Innovation</div><div class="service-card-desc">Crafting forward-looking digital strategies that align technology investments with organizational vision and market opportunity.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">TA</div><div class="service-card-name">Technology Advisory</div><div class="service-card-desc">Independent guidance on architecture decisions, platform selection, and technology investment to reduce risk and accelerate value.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">CX</div><div class="service-card-name">Customer Experience &amp; UX Design</div><div class="service-card-desc">Designing intuitive digital experiences that deepen customer relationships and drive measurable engagement outcomes.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">DA</div><div class="service-card-name">Data &amp; Analytics</div><div class="service-card-desc">Building data capabilities that transform raw information into decision-ready intelligence across the enterprise.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">DM</div><div class="service-card-name">Digital Marketing &amp; Commerce</div><div class="service-card-desc">Integrated digital marketing strategies that connect brands with audiences and convert engagement into commercial results.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">Ag</div><div class="service-card-name">Agile &amp; DevOps Transformation</div><div class="service-card-desc">Embedding agile methodologies and DevOps culture to accelerate delivery, improve quality, and increase organizational resilience.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">CM</div><div class="service-card-name">Change Management</div><div class="service-card-desc">Guiding organizations and their people through digital transformation with structured approaches to adoption and cultural change.</div></div>
+
+          <div class="service-card" role="listitem">
+            <div class="service-card-icon">GP</div>
+            <div class="service-card-name">Governance & Policies</div>
+            <div class="service-card-desc">Strengthening governance frameworks and policy structures to ensure accountability, compliance, and institutional integrity.</div>
+          </div>
+
+          <div class="service-card" role="listitem">
+            <div class="service-card-icon">SO</div>
+            <div class="service-card-name">Strategy & Operations</div>
+            <div class="service-card-desc">Developing clear, actionable strategies and streamlining operations to drive performance and sustainable organizational growth.</div>
+          </div>
+
+          <div class="service-card" role="listitem">
+            <div class="service-card-icon">BI</div>
+            <div class="service-card-name">Business Intelligence</div>
+            <div class="service-card-desc">Transforming data into decision-ready intelligence that sharpens competitive positioning and drives informed leadership decisions.</div>
+          </div>
+
+          <div class="service-card" role="listitem">
+            <div class="service-card-icon">FC</div>
+            <div class="service-card-name">Finance & Compliance</div>
+            <div class="service-card-desc">Providing financial advisory, planning, and compliance support to strengthen fiscal health and regulatory alignment.</div>
+          </div>
+
+          <div class="service-card" role="listitem">
+            <div class="service-card-icon">DC</div>
+            <div class="service-card-name">Development Consulting</div>
+            <div class="service-card-desc">Supporting NGOs, development agencies, and government bodies to design, implement, and measure impactful programs.</div>
+          </div>
+
+          <div class="service-card" role="listitem">
+            <div class="service-card-icon">OD</div>
+            <div class="service-card-name">Organisational Design</div>
+            <div class="service-card-desc">Redesigning organizational structures, roles, and processes to align institutional capacity with strategic ambition and future growth.</div>
+          </div>
+
         </div>
-        <div class="carousel-nav" aria-label="Navigate Digital Consulting services">
+        <div class="carousel-nav" aria-label="Navigate services">
           <button class="carousel-btn" data-carousel="carousel-1" data-dir="-1" aria-label="Previous">←</button>
           <button class="carousel-btn" data-carousel="carousel-1" data-dir="1" aria-label="Next">→</button>
         </div>
       </div>
     </div>
 
-    <!-- Pillar 2: Development Consulting -->
-    <div class="service-pillar reveal">
-      <div class="pillar-header">
-        <div class="pillar-title-group">
-          <div class="pillar-num">02</div>
-          <h3 class="pillar-title">Development Consulting</h3>
-        </div>
-        <p class="pillar-desc">Supporting NGOs, development agencies, and government bodies to design, implement, and measure impactful programs.</p>
-      </div>
-      <div class="carousel-wrapper">
-        <div class="carousel-track" id="carousel-2" role="list">
-          <div class="service-card" role="listitem"><div class="service-card-icon">PD</div><div class="service-card-name">Program Design &amp; Implementation</div><div class="service-card-desc">Developing rigorous, context-responsive programs that translate policy goals into community-level outcomes.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">ME</div><div class="service-card-name">Monitoring &amp; Evaluation (MEAL)</div><div class="service-card-desc">Building MEAL frameworks that ensure accountability, continuous learning, and evidence-based program adaptation.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">RP</div><div class="service-card-name">Research &amp; Policy Analysis</div><div class="service-card-desc">Generating evidence that informs policy design, advocacy efforts, and organizational decision-making.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">SP</div><div class="service-card-name">Strategic Planning &amp; Org. Strengthening</div><div class="service-card-desc">Facilitating strategic planning processes that align institutional capacity with mandate and long-term sustainability.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">AS</div><div class="service-card-name">Advocacy &amp; Stakeholder Engagement</div><div class="service-card-desc">Designing stakeholder engagement strategies that build coalitions, manage narratives, and achieve policy influence.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">GM</div><div class="service-card-name">Grant Management &amp; Resource Mobilization</div><div class="service-card-desc">Strengthening organizational capacity to attract, manage, and report on grant funding from diverse sources.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">CB</div><div class="service-card-name">Capacity Building &amp; Communications</div><div class="service-card-desc">Developing institutional capabilities through targeted training, knowledge transfer, and strategic communication.</div></div>
-        </div>
-        <div class="carousel-nav" aria-label="Navigate Development Consulting services">
-          <button class="carousel-btn" data-carousel="carousel-2" data-dir="-1" aria-label="Previous">←</button>
-          <button class="carousel-btn" data-carousel="carousel-2" data-dir="1" aria-label="Next">→</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pillar 3: Business Consulting -->
-    <div class="service-pillar reveal">
-      <div class="pillar-header">
-        <div class="pillar-title-group">
-          <div class="pillar-num">03</div>
-          <h3 class="pillar-title">Business Consulting</h3>
-        </div>
-        <p class="pillar-desc">Helping organizations sharpen strategy, improve operations, and build the foundations for sustainable growth.</p>
-      </div>
-      <div class="carousel-wrapper">
-        <div class="carousel-track" id="carousel-3" role="list">
-          <div class="service-card" role="listitem"><div class="service-card-icon">SG</div><div class="service-card-name">Strategy &amp; Growth Planning</div><div class="service-card-desc">Developing clear, actionable strategies that position organizations for competitive advantage and long-term growth.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">OP</div><div class="service-card-name">Operations &amp; Process Excellence</div><div class="service-card-desc">Identifying and eliminating operational inefficiencies to unlock productivity, reduce cost, and improve service quality.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">FA</div><div class="service-card-name">Financial Advisory &amp; Planning</div><div class="service-card-desc">Providing financial modeling, planning, and advisory support to strengthen financial health and investment decisions.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">MR</div><div class="service-card-name">Market Research &amp; Intelligence</div><div class="service-card-desc">Delivering rigorous market insights that reduce uncertainty and sharpen competitive positioning.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">RG</div><div class="service-card-name">Risk Management &amp; Governance</div><div class="service-card-desc">Strengthening governance frameworks and risk management capabilities to protect organizational value.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">IR</div><div class="service-card-name">Investment Readiness &amp; Business Development</div><div class="service-card-desc">Preparing organizations to attract investment and develop new business through robust documentation and commercial strategy.</div></div>
-        </div>
-        <div class="carousel-nav" aria-label="Navigate Business Consulting services">
-          <button class="carousel-btn" data-carousel="carousel-3" data-dir="-1" aria-label="Previous">←</button>
-          <button class="carousel-btn" data-carousel="carousel-3" data-dir="1" aria-label="Next">→</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pillar 4: HR Consulting -->
-    <div class="service-pillar reveal">
-      <div class="pillar-header">
-        <div class="pillar-title-group">
-          <div class="pillar-num">04</div>
-          <h3 class="pillar-title">Human Resource Consulting</h3>
-        </div>
-        <p class="pillar-desc">Aligning people strategy with organizational ambition to build high-performance, future-ready workforces.</p>
-      </div>
-      <div class="carousel-wrapper">
-        <div class="carousel-track" id="carousel-4" role="list">
-          <div class="service-card" role="listitem"><div class="service-card-icon">HR</div><div class="service-card-name">HR Strategy &amp; Workforce Planning</div><div class="service-card-desc">Designing people strategies that align talent supply with organizational demand today and into the future.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">TM</div><div class="service-card-name">Talent Management</div><div class="service-card-desc">Developing end-to-end talent frameworks that attract, develop, retain, and engage high-performing individuals.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">LD</div><div class="service-card-name">Learning &amp; Development</div><div class="service-card-desc">Designing learning architectures that build critical capabilities, accelerate performance, and prepare leaders for the future.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">CC</div><div class="service-card-name">Culture &amp; Change Management</div><div class="service-card-desc">Shaping organizational culture to enable transformation, improve engagement, and build sustainable high performance.</div></div>
-          <div class="service-card" role="listitem"><div class="service-card-icon">CS</div><div class="service-card-name">Compensation &amp; HR Systems</div><div class="service-card-desc">Designing equitable compensation frameworks and implementing integrated HR systems that support people operations at scale.</div></div>
-        </div>
-        <div class="carousel-nav" aria-label="Navigate HR Consulting services">
-          <button class="carousel-btn" data-carousel="carousel-4" data-dir="-1" aria-label="Previous">←</button>
-          <button class="carousel-btn" data-carousel="carousel-4" data-dir="1" aria-label="Next">→</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     WHY PAC
-     ============================================================ -->
-<section id="why" aria-label="Why choose PAC">
-  <div class="why-header">
-    <h2 class="why-headline reveal">Integrated Expertise.<br><em>Measurable</em> Impact.</h2>
-    <div class="why-desc reveal reveal-delay-2">
-      <p>Organizations rarely face isolated challenges. A digital transformation stalls without the right people strategy. A growth plan fails without operational foundations. PAC's integrated model means you have one partner who understands every dimension of your challenge — and designs solutions that work together.</p>
-    </div>
-  </div>
-
-  <div class="why-grid reveal">
-    <div class="why-card" data-num="01">
-      <div class="why-card-accent"></div>
-      <h3 class="why-card-title">Multidisciplinary by Design</h3>
-      <p class="why-card-desc">Our teams draw from business, digital, development, and human capital expertise — eliminating the gaps that single-discipline consultants leave behind.</p>
-    </div>
-    <div class="why-card" data-num="02">
-      <div class="why-card-accent"></div>
-      <h3 class="why-card-title">Context-Responsive Solutions</h3>
-      <p class="why-card-desc">We bring global frameworks but apply them with deep local understanding — designing solutions calibrated to your sector, geography, and organizational culture.</p>
-    </div>
-    <div class="why-card" data-num="03">
-      <div class="why-card-accent"></div>
-      <h3 class="why-card-title">Execution-Oriented Advisory</h3>
-      <p class="why-card-desc">We don't stop at strategy. Our advisory engagements are designed for implementation — ensuring that recommendations translate into tangible, measurable change.</p>
-    </div>
-    <div class="why-card" data-num="04">
-      <div class="why-card-accent"></div>
-      <h3 class="why-card-title">Long-Term Partnership Model</h3>
-      <p class="why-card-desc">Our 94% retention rate reflects a commitment to sustained impact. We build enduring relationships with clients, growing our value as your organization evolves.</p>
-    </div>
   </div>
 </section>
 
@@ -2021,9 +2179,9 @@ footer {
         <div class="label">Engagements</div>
         <h2 class="section-title">Upcoming Events &amp; Engagements</h2>
       </div>
-      <a href="#events" class="view-all-link">View all events</a>
+<a href="#Events" class="view-all-link">View all events</a>      
     </div>
-
+2
     <div class="events-grid">
       <article class="event-card reveal">
         <div class="event-date-block">
@@ -2038,7 +2196,9 @@ footer {
             Nairobi, Kenya · Hybrid
           </div>
         </div>
-        <div class="event-register">Register Now <span>→</span></div>
+        <div class="event-register">Register Now <span>→</span>
+        <a href="https://forms.gle/miKSzvcQ7aV2Nj756" target="_blank">register</a> 
+        </div>
       </article>
 
       <article class="event-card reveal reveal-delay-2">
@@ -2079,7 +2239,7 @@ footer {
 <!-- ============================================================
      PARTNERS
      ============================================================ -->
-<section id="partners" aria-label="Our partners">
+<section id="partners" aria-label="Our partners"></section>
   <div class="partners-header reveal">
     <div class="label">Trusted Partnerships</div>
     <h2 class="display-md" style="margin-top:0.6rem;color:var(--black)">Organizations We've Partnered With</h2>
@@ -2180,6 +2340,11 @@ footer {
      FOOTER
      ============================================================ -->
 <footer id="footer" aria-label="Footer">
+
+  <!-- Background Video -->
+  <video class="footer__bg-video" autoplay muted loop playsinline>
+    <source src="8387491-uhd_3840_2160_30fps.mp4" type="video/mp4">
+  </video>
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="footer-logo">
@@ -2283,6 +2448,35 @@ footer {
     </div>
   </div>
 </footer>
+<!-- Modals -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+
+<div class="modal" id="modal-mission">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-label">Mission</div>
+  <h3 class="modal-title">Our Mission</h3>
+  <p class="modal-text">To empower organizations with the strategic clarity, operational capability, and transformative solutions needed to achieve sustainable impact in an ever-evolving world.</p>
+</div>
+
+<div class="modal" id="modal-vision">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-label">Vision</div>
+  <h3 class="modal-title">Our Vision</h3>
+  <p class="modal-text">To be Africa's most trusted advisory partner — recognized for delivering integrated, high-impact consulting solutions that shape institutions, transform communities, and drive lasting change.</p>
+</div>
+
+<div class="modal" id="modal-focus">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-label">Our Focus</div>
+  <h3 class="modal-title">Our Focus</h3>
+  <p class="modal-text">PAC focuses on organizations at critical inflection points — where strategy, capability, and execution must align. We work across the private sector, public institutions, development organizations, and SMEs to deliver solutions that are rigorous, contextual, and built for lasting impact.</p>
+</div>
+<div class="modal" id="modal-vision">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-label">Who Are We</div>
+  <h3 class="modal-title">Who Are We</h3>
+  <p class="modal-text">Priority Activator Consulting is a multidisciplinary advisory firm that helps organizations navigate transformation, strengthen performance, and create sustainable impact. We partner with institutions at critical inflection points when strategy, capability, and execution must all align.</p>
+</div>
 
 <!-- ============================================================
      JAVASCRIPT
@@ -2434,7 +2628,109 @@ document.querySelector('.newsletter-btn')?.addEventListener('click', function() 
     input.style.borderColor = '';
   }, 4000);
 });
-</script>
 
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.style.position = 'fixed';
+canvas.style.top = '0';
+canvas.style.left = '0';
+canvas.style.width = '100%';
+canvas.style.height = '100%';
+canvas.style.zIndex = '0';
+canvas.style.pointerEvents = 'none';
+
+let particles = [];
+const PARTICLE_COUNT = 80;
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function createParticle() {
+  return {
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4,
+    radius: Math.random() * 3 + 1.5,
+    opacity: Math.random() * 0.5 + 0.4
+  };
+}
+
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+  particles.push(createParticle());
+}
+
+function drawLines() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(235, 87, 51, ${0.12 * (1 - dist / 120)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(235, 87, 51, ${p.opacity})`;
+    ctx.fill();
+  });
+
+  drawLines();
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+
+  function openModal(type) {
+    document.getElementById('modal-overlay').classList.add('active');
+    document.getElementById('modal-' + type).classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+  }
+
+  // Close with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+  function openModal(type) {
+        document.getElementById('modal-overlay').classList.add('active');
+        document.getElementById('modal-' + type).classList.add('active');
+      }
+      function closeModal() {
+        document.getElementById('modal-overlay').classList.remove('active');
+        document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+</script>
 </body>
 </html>
